@@ -11,7 +11,7 @@ return Autoload::createFactory(function($factory){
     $factory->set('zip', true);
     $factory->set('development', false);
     $factory->set('composer', false);
-    $factory->set('password', 'password_here');
+    $factory->set('password', '1234');
     
     $factory->add([
         'App\\' => $factory->basepath .'src/App',
