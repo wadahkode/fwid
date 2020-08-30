@@ -1,0 +1,7 @@
+[32;mWadahkode versi v1.0.0[0m
+
+help:list	show this help
+make:controller make controller
+make:model	make model
+
+serve		run server

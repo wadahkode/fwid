@@ -229,7 +229,7 @@ class Autoload
         $this->compiler->writeTo($build, $contents);
         $this->compiler->close();
         $this->includeFile($build);
-        unlink($build . '.php');
+        @unlink($build . '.php');
     }
     
     public function register()
