@@ -1,0 +1,8 @@
+<?php
+define('TERMINAL_INPUT', isset($_SERVER['argv']) ? $_SERVER['argv'] : []);
+
+require_once __DIR__.'/bootstrap/app.php';
+
+return Wadahkode\Console\Terminal::register(function($terminal){
+    return $terminal->execute();
+});
