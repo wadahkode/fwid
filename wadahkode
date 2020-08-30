@@ -1,4 +1,10 @@
 <?php
+/**
+ * Terminal
+ * 
+ * @author wadahkode
+ * @since version v1.0.0
+ */
 define('TERMINAL_INPUT', isset($_SERVER['argv']) ? $_SERVER['argv'] : []);
 
 require_once __DIR__.'/bootstrap/app.php';

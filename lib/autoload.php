@@ -216,7 +216,7 @@ class Autoload
         }
         $pathinfo = $this->path[$id[0]] . $id[0] . '.zip';
         $search = implode(DIRECTORY_SEPARATOR, $id);
-        // check status
+        // check status opening...
         $status = $this->compiler->open($pathinfo);
         
         if (!$status) {

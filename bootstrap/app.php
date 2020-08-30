@@ -1,4 +1,10 @@
 <?php
+/**
+ * Register Autoload
+ * 
+ * @author wadahkode
+ * @since version v1.0.0
+ */
 require_once(__DIR__.'/../lib/autoload.php');
 
 return Autoload::createFactory(function($factory){

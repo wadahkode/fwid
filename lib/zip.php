@@ -11,6 +11,11 @@ class Zip extends \ZipArchive
 {
     protected $extension = "";
     
+    /**
+     * Read content from zip
+     * 
+     * @param string $entryName
+     */
     public function read($entryName)
     {
         $entry = !empty($this->extension)
