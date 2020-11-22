@@ -7,9 +7,15 @@
  */
 require_once(__DIR__.'/../lib/autoload.php');
 
-return Autoload::createFactory(function($factory){
+/**
+ * Create Factory
+ * 
+ * @param callable $factory
+ * @return Autoload::createFactory(callable $factory)
+ */
+Autoload::createFactory(function($factory){
     $factory->set('zip', true);
-    $factory->set('development', false);
+    $factory->set('development', true);
     $factory->set('composer', false);
     $factory->set('password', '1234');
     
@@ -20,3 +26,7 @@ return Autoload::createFactory(function($factory){
     
     return $factory->is('vendor')->register();
 });
+
+$app = new Wadahkode\App(realpath(rtrim(__DIR__, '/\\')));
+
+return $app;
