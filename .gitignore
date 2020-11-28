@@ -1,4 +1,4 @@
-lib/Wadahkode
+#lib/Wadahkode
 src/App/Http/Controller/*
 !Controller.php
 src/App/Http/Model/*
