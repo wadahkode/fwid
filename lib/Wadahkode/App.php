@@ -62,7 +62,6 @@ class App extends Container
     public function require($module, ...$param)
     {
         $module = str_replace("/","\\",$module);
-        
         if (class_exists($module)) {
             if (empty($param)) {
                 return new $module;
@@ -73,6 +72,7 @@ class App extends Container
                     default: return new $module($param[0]);
                 }
             }
+            return false;
         }
     }
     

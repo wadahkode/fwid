@@ -173,7 +173,11 @@ class Autoload
     private function includeFile($filename)
     {
         $file = $this->findFile($filename);
-        if (!$file) exit("File $filename.php not found!\n");
+        if (!$file) {
+            createNotification("File $filename.php not found!\n", 404);
+            
+            return false;
+        }
         include($file);
     }
     
