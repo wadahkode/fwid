@@ -10,3 +10,4 @@ src/*
 !Routes
 !Templates
 bootstraps
+/vendor/

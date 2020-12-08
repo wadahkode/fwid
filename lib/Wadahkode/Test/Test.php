@@ -36,6 +36,11 @@ class Test
             printf("%s<br>", $say);
         }
     }
+    
+    public function myName(string $name="")
+    {
+        return $name;
+    }
 }
 
 function say() {

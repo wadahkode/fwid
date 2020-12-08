@@ -1,0 +1,53 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "2ba24a38e88d77d270cd01e7d0046c93",
+    "packages": [
+        {
+            "name": "wadahkode/wadahkode",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wadahkode/php-src.git",
+                "reference": "dccf6a2a53792dbfec18580c6d54a7dc11cc0e5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wadahkode/php-src/zipball/dccf6a2a53792dbfec18580c6d54a7dc11cc0e5c",
+                "reference": "dccf6a2a53792dbfec18580c6d54a7dc11cc0e5c",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wadahkode\\": "Wadahkode"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "wadahkode",
+                    "email": "mvp.dedefilaras@gmail.com"
+                }
+            ],
+            "description": "Library for fwid",
+            "time": "2020-12-07T23:46:40+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "wadahkode/wadahkode": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

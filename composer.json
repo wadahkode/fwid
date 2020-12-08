@@ -1,0 +1,15 @@
+{
+    "name": "wadahkode/fwid",
+    "description": "project,framework",
+    "type": "library,project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wadahkode",
+            "email": "mvp.dedefilaras@gmail.com"
+        }
+    ],
+    "require": {
+        "wadahkode/wadahkode": "dev-dev"
+    }
+}
