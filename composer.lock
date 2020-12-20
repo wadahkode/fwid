@@ -12,18 +12,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wadahkode/php-src.git",
-                "reference": "dccf6a2a53792dbfec18580c6d54a7dc11cc0e5c"
+                "reference": "f2eda15be220dca0b5293ca7211eb0de627af0de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wadahkode/php-src/zipball/dccf6a2a53792dbfec18580c6d54a7dc11cc0e5c",
-                "reference": "dccf6a2a53792dbfec18580c6d54a7dc11cc0e5c",
+                "url": "https://api.github.com/repos/wadahkode/php-src/zipball/f2eda15be220dca0b5293ca7211eb0de627af0de",
+                "reference": "f2eda15be220dca0b5293ca7211eb0de627af0de",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Wadahkode\\": "Wadahkode"
+                    "Wadahkode\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -37,7 +37,7 @@
                 }
             ],
             "description": "Library for fwid",
-            "time": "2020-12-07T23:46:40+00:00"
+            "time": "2020-12-19T23:59:02+00:00"
         }
     ],
     "packages-dev": [],
