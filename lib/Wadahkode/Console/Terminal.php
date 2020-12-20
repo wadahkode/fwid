@@ -72,6 +72,6 @@ class Terminal
     
     private function serve()
     {
-        return exec("php -S localhost:8000 -t .");
+        return exec("php -S localhost:8000 -t ./public");
     }
 }
