@@ -9,6 +9,8 @@ src/*
 !Helpers
 !Routes
 !Templates
+!*.js
+!nodejs
 bootstraps
 /vendor/
 composer.lock
