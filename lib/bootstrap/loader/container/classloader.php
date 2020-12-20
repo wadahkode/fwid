@@ -261,7 +261,7 @@ abstract class ClassLoader
     
     public function useZipReader()
     {
-        $this->includeFile($this->basepath . 'lib/zip');
+        $this->includeFile($this->basepath . 'lib/bootstrap/reader/zip');
         
         if (class_exists(Zip::class) && !$this->zip) {
             exit("You has set [zip] for actived!\n");
