@@ -2,16 +2,8 @@
 src/App/Http/Controller/*
 !Controller.php
 src/App/Http/Model/*
+src/nodejs/config/firebase.js
 !.gitkeep
-src/*
-!App
-!Config
-!Helpers
-!Routes
-!Templates
-!*.js
-!nodejs
-bootstraps
 /vendor/
 composer.lock
 package-lock.json
