@@ -1,9 +1,3 @@
-#lib/Wadahkode
-src/App/Http/Controller/*
-!Controller.php
-src/App/Http/Model/*
-src/nodejs/config/firebase.js
-!.gitkeep
 /vendor/
 composer.lock
 package-lock.json
