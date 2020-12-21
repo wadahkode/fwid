@@ -1,8 +1,15 @@
+const firebase = require('firebase/app').default;
+const Exception = require('./exception');
+require('firebase/auth');
+require('firebase/database');
+require('firebase/storage');
+
 class Wadahkode {
   constructor(config={}) {
     this.name = "Wadahkode";
     this.config = config;
     this.container = this.getContainer();
+    this.splashscreen = config.splashscreen;
   }
   
   connectionLost() {
@@ -17,44 +24,24 @@ class Wadahkode {
       `;
   }
   
-  debug() {
-    let debugEl = document.createElement('button'),
-      debugModal = document.createElement('div');
+  exception(message=null, filename=null, line=0) {
+    if (this.config.mode !== 'production') {
+      return new Exception(message, filename, line);
+    }
+  }
+  
+  firebaseSetup() {
+    const {use, collection, fileConfig} = this.config.firebase;
     
     try {
-      if (this.config.mode !== 'production') {
-        throw new Error('Sedang dalam pengembangan!');
+      if (use) {
+        const firebaseConfig = require(`${fileConfig}`);
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        throw new Error('Firebase belum diaktifkan!');
       }
-      
     } catch (e) {
-      
-    debugEl.className = 'debug btn btn-primary';
-      debugEl.setAttribute('data-toggle','modal');
-      debugEl.setAttribute('data-target','#debuging');
-      debugEl.innerHTML = 'debug';
-      debugModal.className = 'modal fade';
-      debugModal.id = 'debuging';
-      debugModal.innerHTML = `
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Debugging</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>${e.message}</p>
-            </div>
-          </div>
-        </div>
-      `;
-      
-      if (this.container == null) {
-        return false;
-      }
-      this.container.appendChild(debugEl);
-      this.container.appendChild(debugModal);
+      this.exception(e.message, e.fileName, e.lineNumber);
     }
   }
   
@@ -64,8 +51,53 @@ class Wadahkode {
     }
   }
   
+  getReady() {
+    // Menampilkan splashscreen jika sudah diatur
+    if (this.splashscreen) {
+      this.getSplashScreen();
+    }
+    
+    this.testFirebaseConnected(status => {
+      try {
+        if (!status)
+          return this.exception('Layanan firebase tidak dapat terhubung, koneksi internet anda mungkin terlalu lambat!');
+      
+        require('./routes/web');
+      } catch (e) {
+        this.exception(e.message, e.fileName, e.lineNumber);
+      }
+    });
+  }
+  
+  getSplashScreen() {
+    this.container.style.background = "#fff";
+    this.container.innerHTML = `
+      <div class="splashscreen">
+        <div class="brand text-light">Wadahkode</div>
+        <div class="loading">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    `;
+  }
+  
   isConnected() {
     return navigator.onLine ? true : false;
+  }
+  
+  testFirebaseConnected(callback) {
+    return firebase.database().ref('/.info/connected')
+      .on('value', snap => {
+        setTimeout(function() {
+          if (snap.val() === true) {
+            callback(true);
+          }
+        }, 3000);
+      });
   }
 }
 

@@ -12,17 +12,15 @@ const wadahkode = require('./nodejs/wadahkode');
     return app.connectionLost();
   }
   
-  /**
-   * Warning (!)
-   * 
-   * Jika dalam masa pengembangan alahkah lebih baik,
-   * atur mode kedalam "development", tetapi jika ingin
-   * melanjutkan kedalam produksi, atur mode menjadi:
-   * 
-   * new wadahkode({mode: "production"})
-   */
-  app.debug();
+  // Pengaturan Firebase
+  app.firebaseSetup();
   
+  return app.getReady();
 })(new wadahkode({
-  mode: "development"
+  mode: "development",
+  firebase: {
+    use: true,
+    fileConfig: "./config/firebase"
+  },
+  splashscreen: true
 }));

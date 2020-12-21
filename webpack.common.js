@@ -19,7 +19,10 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader"
+        use: "babel-loader",
+        query: {
+          compact: false
+        }
       },
       {
         test: /\.s[ac]ss$/i,
