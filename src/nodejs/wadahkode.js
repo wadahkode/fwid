@@ -61,7 +61,6 @@ class Wadahkode {
       try {
         if (!status)
           return this.exception('Layanan firebase tidak dapat terhubung, koneksi internet anda mungkin terlalu lambat!');
-      
         require('./routes/web');
       } catch (e) {
         this.exception(e.message, e.fileName, e.lineNumber);

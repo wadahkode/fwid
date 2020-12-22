@@ -8,6 +8,7 @@ module.exports = {
     app: './src/index.js',
     style: './src/styles.js'
   },
+  //target: ["web","node"],
   plugins: [
     new CleanWebpackPlugin(),
   ],
@@ -19,20 +20,24 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader",
-        query: {
-          compact: false
-        }
+        exclude: /node_modules/,
+        use: "babel-loader"
       },
       {
         test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"]
-      }
+      },
     ]
+  },
+  resolve: {
+    fallback: {
+      //url: false
+    },
   },
   performance: {
     hints: false, //'warning',
-    //maxEntrypointSize: 4 * 1024 * 1024,
-    //maxAssetSize: 10 * 1024 * 1024
+    maxEntrypointSize: 4 * 1024 * 1024,
+    maxAssetSize: 10 * 1024 * 1024
   }
 };
