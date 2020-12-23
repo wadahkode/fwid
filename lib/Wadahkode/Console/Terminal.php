@@ -70,8 +70,14 @@ class Terminal
         return $console(new self(TERMINAL_INPUT));
     }
     
-    private function serve()
+    private function serve($argv)
     {
-        return exec("php -S localhost:8000 -t ./public");
+      switch (TERMINAL_INPUT[2]) {
+        case '--with-nodejs':
+          return exec("nodemon ./build/serve.js");
+        
+        default:
+          return exec("php -S localhost:8000 -t public");
+      }
     }
 }

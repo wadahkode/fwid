@@ -1,8 +1,3 @@
-const router = require('../io/router'),
-  Route = new router();
+import Router from '../io/router';
   
-Route.get('/', function(){
-  const container = document.getElementById('root');
-
-  container.innerHTML = 'Selamat datang di Framework Javascript Indonesia';
-});
+console.log(Router);

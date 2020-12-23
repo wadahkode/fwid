@@ -62,6 +62,8 @@ class Wadahkode {
         if (!status)
           return this.exception('Layanan firebase tidak dapat terhubung, koneksi internet anda mungkin terlalu lambat!');
         require('./routes/web');
+        
+        localStorage.setItem('_spsc', true);
       } catch (e) {
         this.exception(e.message, e.fileName, e.lineNumber);
       }
@@ -69,19 +71,33 @@ class Wadahkode {
   }
   
   getSplashScreen() {
-    this.container.style.background = "#fff";
-    this.container.innerHTML = `
-      <div class="splashscreen">
-        <div class="brand text-light">Wadahkode</div>
-        <div class="loading">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+    if (!localStorage.getItem('_spsc')) {
+      this.container.style.background = "#fff";
+      this.container.innerHTML = `
+        <div class="splashscreen">
+          <div class="brand text-light">Wadahkode</div>
+          <div class="loading">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      let date = new Date(),
+        seconds = date.getMilliseconds(),
+        limit = 60 * 60 * 6,
+        i = 0;
+        refresh = setInterval(() => {
+          if (i == limit) {
+            localStorage.removeItem('_spsc');
+            i = 0;
+          }
+          i++;
+        }, seconds);
+    }
   }
   
   isConnected() {
@@ -95,7 +111,7 @@ class Wadahkode {
           if (snap.val() === true) {
             callback(true);
           }
-        }, 3000);
+        }, 20);
       });
   }
 }

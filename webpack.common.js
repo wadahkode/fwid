@@ -8,9 +8,9 @@ module.exports = {
     app: './src/index.js',
     style: './src/styles.js'
   },
-  //target: ["web","node"],
+  //target: "node",
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin()
   ],
   output: {
     filename: '[name].min.js',
@@ -32,6 +32,8 @@ module.exports = {
   },
   resolve: {
     fallback: {
+      //fs: false,
+      //path: false
       //url: false
     },
   },

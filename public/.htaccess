@@ -6,7 +6,7 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^(.*)$ index.html [L]
+RewriteRule ^(.*)$ index.php [L]
 #RewriteRule ^([a-zA-Z]*)/?([a-zA-Z]*)?/?([a-zA-Z0-9]*)?/?$ \
 #    index.php?controller=$1&action=$2&parameter=$3 [NC,L]
 
