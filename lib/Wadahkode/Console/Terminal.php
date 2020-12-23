@@ -77,7 +77,7 @@ class Terminal
           return exec("nodemon ./build/serve.js");
         
         default:
-          return exec("php -S localhost:8000 -t public");
+          return exec("php -S localhost:8000 -t ./");
       }
     }
 }
