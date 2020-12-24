@@ -60,7 +60,7 @@ var Router = {
             }
             else {
                 _this.response.writeHead(500);
-                _this.response.end("Router untuk " + _this.request.url + " tidak dapat ditemukan!");
+                _this.response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
             }
         });
         stream.on('end', function () { return _this.response.end(); });

@@ -81,7 +81,7 @@ let Router = {
         );
       } else {
         this.response.writeHead(500);
-        this.response.end(`Router untuk ${this.request.url} tidak dapat ditemukan!`);
+        this.response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
       }
     });
     
