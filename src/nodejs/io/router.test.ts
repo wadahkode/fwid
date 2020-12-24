@@ -64,18 +64,18 @@ let Router = {
         '.otf': 'application/font-otf',
         '.wasm': 'application/wasm'
       },
-      contenyTypes: string = mimeTypes[extname] || 'application/octect-stream',
+      contentTypes: string = mimeTypes[extname] || 'application/octect-stream',
       pageError: string = loader('public', '404.html');
       
     stream.on('open', () => stream.pipe(this.response));
     stream.on('data', (chunk: any) => {
-      this.response.writeHead(200, {'Content-Type': contenyTypes});
+      this.response.writeHead(200, {'Content-Type': contentTypes});
       this.response.end(chunk);
     });
     
     stream.on('error', (error: any) => {
       if (error.code == 'ENOENT') {
-        this.response.writeHead(404, {'Content-Type': contenyTypes});
+        this.response.writeHead(404, {'Content-Type': contentTypes});
         this.response.end(
           fs.readFileSync(pageError, 'utf-8')
         );

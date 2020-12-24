@@ -47,15 +47,15 @@ var Router = {
             '.eot': 'application/vnd.ms-fontobject',
             '.otf': 'application/font-otf',
             '.wasm': 'application/wasm'
-        }, contenyTypes = mimeTypes[extname] || 'application/octect-stream', pageError = loader('public', '404.html');
+        }, contentTypes = mimeTypes[extname] || 'application/octect-stream', pageError = loader('public', '404.html');
         stream.on('open', function () { return stream.pipe(_this.response); });
         stream.on('data', function (chunk) {
-            _this.response.writeHead(200, { 'Content-Type': contenyTypes });
+            _this.response.writeHead(200, { 'Content-Type': contentTypes });
             _this.response.end(chunk);
         });
         stream.on('error', function (error) {
             if (error.code == 'ENOENT') {
-                _this.response.writeHead(404, { 'Content-Type': contenyTypes });
+                _this.response.writeHead(404, { 'Content-Type': contentTypes });
                 _this.response.end(fs.readFileSync(pageError, 'utf-8'));
             }
             else {
