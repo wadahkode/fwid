@@ -1,6 +1,8 @@
 const wadahkode = require('./wadahkode.test'),
   Route = wadahkode().router;
 
-Route.group('/', function(this: void, route: any) {
-  route.get('index.html', () => {});
+Route.group('/', function(this: void, route: typeof Route) {
+  route.get('index.html', function(){
+    
+  });
 });
