@@ -8,8 +8,8 @@
   },
   "scripts": {
     "devjs": "webpack --watch --config webpack.dev.js",
-    "dev-start": "tsc -w",
-    "serve": "nodemon build/serve.js",
+    "devts": "tsc -w",
+    "serve": "php wadahkode serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
