@@ -5,10 +5,10 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.js',
-    style: './src/styles.js'
+    app: './build/index.js',
+    style: './build/styles.js'
   },
-  //target: "node",
+  //target: "es15",
   plugins: [
     new CleanWebpackPlugin()
   ],
@@ -21,7 +21,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: "babel-loader"
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-typescript']
+          }
+        }
       },
       {
         test: /\.s[ac]ss$/i,

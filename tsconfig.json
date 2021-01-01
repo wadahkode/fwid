@@ -5,8 +5,8 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "./build",
-    "sourceMap": true
+    "moduleResolution": "node"
   },
-  "include": ["src/nodejs/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

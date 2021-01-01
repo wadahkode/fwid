@@ -1,15 +1,20 @@
+const internet = require('is-online');
 const firebase = require('firebase/app').default;
-const Exception = require('./exception');
+const exception = require('./exception');
+require('jsdom-global')();
 require('firebase/auth');
 require('firebase/database');
 require('firebase/storage');
 
-class Wadahkode {
-  constructor(config={}) {
-    this.name = "Wadahkode";
-    this.config = config;
-    this.container = this.getContainer();
-    this.splashscreen = config.splashscreen;
+class WadahkodeTest {
+  public name: string = 'Wadahkode';
+  public config: any;
+  private container: any;
+  private splashscreen: boolean = false;
+  
+  constructor(prop: boolean = false) {
+    this.container = document.getElementById('root');
+    this.splashscreen = prop;
   }
   
   connectionLost() {
@@ -24,14 +29,17 @@ class Wadahkode {
       `;
   }
   
-  exception(message=null, filename=null, line=0) {
+  exception(message: string = null, filename: string = null, line: number = 0) {
     if (this.config.mode !== 'production') {
-      return new Exception(message, filename, line);
+      return new exception(message, filename, line);
     }
   }
   
   firebaseSetup() {
-    const {use, collection, fileConfig} = this.config.firebase;
+    const {
+      use,
+      fileConfig
+    } = this.config.firebase;
     
     try {
       if (use) {
@@ -45,25 +53,19 @@ class Wadahkode {
     }
   }
   
-  getContainer() {
-    if (typeof document == 'object') {
-      return document.getElementById('root');
-    }
-  }
-  
   getReady() {
-    // Menampilkan splashscreen jika sudah diatur
+    this.splashscreen = this.config.splashscreen;
+    
     if (this.splashscreen) {
       this.getSplashScreen();
     }
     
-    this.testFirebaseConnected(status => {
+    this.testFirebaseConnected((status: boolean) => {
       try {
-        if (!status)
-          return this.exception('Layanan firebase tidak dapat terhubung, koneksi internet anda mungkin terlalu lambat!');
-        require('./routes/web');
+        if (!status) return this.exception('Layanan firebase tidak dapat terhubung, koneksi internet anda mungkin terlalu lambat!');
         
-        localStorage.setItem('_spsc', true);
+        require('./routes/web');
+       
       } catch (e) {
         this.exception(e.message, e.fileName, e.lineNumber);
       }
@@ -85,12 +87,14 @@ class Wadahkode {
           </div>
         </div>
       `;
+      
+      localStorage.setItem('_spsc', 'true');
     } else {
       let date = new Date(),
-        seconds = date.getMilliseconds(),
-        limit = 60 * 60 * 6,
-        i = 0;
-        refresh = setInterval(() => {
+        seconds: number = date.getMilliseconds(),
+        limit: number = 60 * 60 * 6,
+        i: number = 0,
+        refresh: any = setInterval(() => {
           if (i == limit) {
             localStorage.removeItem('_spsc');
             i = 0;
@@ -100,13 +104,17 @@ class Wadahkode {
     }
   }
   
-  isConnected() {
-    return navigator.onLine ? true : false;
+  isConnected(callback: any) {
+    return internet({timeout: 3000})
+      .then((onLine: any) => {
+        if (!onLine) callback(false);
+        else callback(true);
+      });
   }
   
-  testFirebaseConnected(callback) {
+  testFirebaseConnected(callback: any) {
     return firebase.database().ref('/.info/connected')
-      .on('value', snap => {
+      .on('value', (snap: any) => {
         setTimeout(function() {
           if (snap.val() === true) {
             callback(true);
@@ -116,4 +124,4 @@ class Wadahkode {
   }
 }
 
-module.exports = Wadahkode;
+module.exports = WadahkodeTest;

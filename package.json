@@ -7,8 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "webpack --watch --config webpack.dev.js",
-    "dev-tsc": "tsc -w",
+    "devjs": "webpack --watch --config webpack.dev.js",
+    "dev-start": "tsc -w",
     "serve": "nodemon build/serve.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,7 +36,10 @@
     "css-loader": "^5.0.1",
     "firebase": "^8.2.1",
     "html-webpack-plugin": "^4.5.0",
+    "is-online": "^9.0.0",
     "jquery": "^3.5.1",
+    "jsdom": "16.4.0",
+    "jsdom-global": "3.0.2",
     "popper.js": "^1.16.1",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",

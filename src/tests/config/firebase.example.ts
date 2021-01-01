@@ -1,4 +1,4 @@
-const firebaseConfig = {
+const firebaseConfigExample = {
   apiKey: "",
   authDomain: "",
   databaseURL: "",
@@ -8,4 +8,4 @@ const firebaseConfig = {
   appId: "",
 };
 
-module.exports = firebaseConfig;
+module.exports = firebaseConfigExample;

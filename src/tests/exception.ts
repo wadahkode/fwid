@@ -1,3 +1,5 @@
+require('jsdom-global')();
+
 /**
  * Exception
  * 
@@ -5,7 +7,7 @@
  * @since version 1.0.0
  */
 class Exception {
-  constructor(message, filename, line) {
+  constructor(message: string, filename: string, line: number) {
     let el = document.createElement('button'),
       modal = document.createElement('div');
       

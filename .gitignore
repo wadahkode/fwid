@@ -2,6 +2,8 @@
 composer.lock
 package-lock.json
 node_modules
-src/nodejs/config/firebase.js
+src/node
+src/tests/config/firebase.ts
 public/js/*
 !style.min.js
+build
