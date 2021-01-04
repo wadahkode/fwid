@@ -2,5 +2,8 @@
 
 $this->get('/', function(){
   // call WelcomeController
-  return $this->require('App/Http/Controller/WelcomeController', 'index');
+  $welcome = $this->require('App/Http/Controller/WelcomeController');
+
+  // cetak Hello world di browser
+  $welcome->index();
 });
