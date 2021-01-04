@@ -82,6 +82,8 @@ class Terminal
   {
     if (!empty($argv) && $argv == '--with-nodejs') {
       return exec('nodemon ./build/serve.js');
+    } else if (!empty($argv) && $argv == '--with-heroku') {
+      return exec('php -S wadahkode.herokuapp.com:80 -t ./public');
     } else {
       return exec("php -S localhost:8000 -t ./public");
     }
