@@ -1,5 +1,8 @@
 <?php
 
 $this->get('/', function(){
-  return 'Hello world';
+  // panggil kontroller welcome
+  $welcome = $this->require('App/Http/Controller/WelcomeController');
+  // cetak dibrowser
+  return $welcome->index();
 });

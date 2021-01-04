@@ -5,9 +5,9 @@ use Wadahkode\Http\Route;
 
 class Response
 {
-  public function next($request)
+  public function next($request, $app)
   {
     $route = new Route($request);
-    return $route->call();
+    return $route->call($app);
   }
 }

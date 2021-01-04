@@ -4,6 +4,7 @@ namespace Wadahkode\Http;
 class Route
 {
   public $any = [];
+  private $app;
   public $directive = [];
   private $dict = "";
   private $_GET = [];
@@ -33,8 +34,10 @@ class Route
     $this->resolve();
   }
   
-  public function call()
+  public function call($app)
   {
+    $this->app = $app;
+    
     if (file_exists(APP_ROUTE_DIR . 'web.php')) {
       require APP_ROUTE_DIR . 'web.php';
     } else {
@@ -64,6 +67,11 @@ class Route
     } else {
       return '/';
     }
+  }
+  
+  public function require($module)
+  {
+    return $this->app->require($module);
   }
   
   private function resolve()

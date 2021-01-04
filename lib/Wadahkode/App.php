@@ -138,6 +138,6 @@ class App extends Container
     
     protected function terminate($req, $res)
     {
-      return $res->next($req->fromGlobals());
+      return $res->next($req->fromGlobals(), $this);
     }
 }
