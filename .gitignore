@@ -1,6 +1,6 @@
 /vendor/
-composer.lock
-package-lock.json
+#composer.lock
+#package-lock.json
 node_modules
 src/node
 src/tests/config/firebase.ts
