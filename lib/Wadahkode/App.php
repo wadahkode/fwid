@@ -28,6 +28,24 @@ class App extends Container
         $this->getConfig('realpath');
     }
     
+    public function createApp()
+    {
+      $request = $this->require('Wadahkode/Http/Request');
+      $response = $this->require('Wadahkode/Http/Response');
+      
+      $this->terminate($request, $response);
+    }
+    
+    public function compatible(array $settings=[])
+    {
+      if (array_key_exists('php_version', $settings)) {
+        $this->phpCheckVersion($settings['php_version']);
+      } else if (array_key_exists('extension_loaded', $settings)) {
+        $module = $this->require('Wadahkode/Contract/Module');
+        $module->ref($settings['extension_loaded']);
+      }
+    }
+    
     public function getSupportHelper(...$helpers)
     {
         list($helper, $prepend) = $helpers;
@@ -51,6 +69,37 @@ class App extends Container
             ? include($filename)
             : false
         );
+    }
+    
+    /**
+     * Check version php
+     *
+     * Fungsi yang digunakan untuk mengecek versi php
+     * yang terinstall pada system webserver.
+     *
+     * @var bool $system['version']
+     */
+    protected function phpCheckVersion(bool $version)
+    {
+        /**
+         * Jika operating system yang digunakan adalah linux
+         * ubah karakter backslash menjadi slash.
+         * @return os windows|linux
+         */
+        if (defined('PHP_OS') && PHP_OS == 'Linux') {
+            $phpversion = substr(PHP_VERSION, 0, 5);
+        } else {
+            $phpversion = PHP_VERSION;
+        }
+
+        // Jika versi tidak didukung keluarkan dari program dan beri sebuah pesan.
+        if ($version !== false)
+            throw new \Exception(
+                "
+                Peringatan: PHP versi "
+                    . $phpversion
+                    . " tidak didukung, silahkan perbarui ke versi PHP-7.* atau lebih tinggi."
+            );
     }
     
     public function register(callable $app)
@@ -80,7 +129,15 @@ class App extends Container
     {
         $name = preg_split("/\./", $name);
         list($path, $file) = $name;
-        
+        if (!is_dir($this->sourcePath)) {
+          $this->rootPath = dirname($this->rootPath) . DIRECTORY_SEPARATOR;
+          $this->sourcePath = $this->rootPath . 'src' . DIRECTORY_SEPARATOR;
+        }
         $this->config[$file] = $this->sourcePath . ucfirst($path) . DIRECTORY_SEPARATOR . $file . FileExtension::get('php');
+    }
+    
+    protected function terminate($req, $res)
+    {
+      return $res->next($req->fromGlobals());
     }
 }

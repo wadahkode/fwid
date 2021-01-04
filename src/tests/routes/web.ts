@@ -1,9 +1,12 @@
 const Route = require('../router');
+const auth = require('../authenticated');
 //require('jsdom-global')();
+
+auth().has('users');
 
 Route.group('/', function(){
   Route.get('index.html', function(){
-    console.log(true)
+    
   });
   
   Route.get('login', 'login');

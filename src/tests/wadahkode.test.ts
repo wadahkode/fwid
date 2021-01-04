@@ -1,10 +1,10 @@
-const internet = require('is-online');
-const firebase = require('firebase/app').default;
-const exception = require('./exception');
+let internet = require('is-online');
+let firebase = require('firebase/app').default;
+let exception = require('./exception');
 require('jsdom-global')();
-require('firebase/auth');
+//require('firebase/auth');
 require('firebase/database');
-require('firebase/storage');
+//require('firebase/storage');
 
 class WadahkodeTest {
   public name: string = 'Wadahkode';
@@ -65,7 +65,6 @@ class WadahkodeTest {
         if (!status) return this.exception('Layanan firebase tidak dapat terhubung, koneksi internet anda mungkin terlalu lambat!');
         
         require('./routes/web');
-       
       } catch (e) {
         this.exception(e.message, e.fileName, e.lineNumber);
       }
