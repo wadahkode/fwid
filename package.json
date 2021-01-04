@@ -10,7 +10,6 @@
     "devjs": "webpack --watch --config webpack.dev.js",
     "devts": "tsc -w",
     "serve": "php wadahkode serve",
-    "heroku-serve": "php wadahkode serve --with-heroku",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
