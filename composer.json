@@ -1,0 +1,11 @@
+{
+    "name": "wadahkode/fwid",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wadahkode",
+            "email": "mvp.dedefilaras@gmail.com"
+        }
+    ],
+    "require": {}
+}
