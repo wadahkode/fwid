@@ -7,6 +7,17 @@
   <title>@yield('title')</title>
 </head>
 <body>
-  @yield('content')
+  <div id="root">
+    <header class="mb-5">
+      @yield('navbar-top')
+    </header>
+    @yield('content')
+    <footer>
+      @yield('footer')
+    </footer>
+  </div>
+  <script src="js/all.min.js"></script>
+  <script src="js/style.min.js"></script>
+  <script src="js/app.min.js"></script>
 </body>
 </html>

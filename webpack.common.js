@@ -6,6 +6,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = {
   entry: {
     app: './build/index.js',
+    all: './node_modules/@fortawesome/fontawesome-free/js/all.js',
     style: './build/styles.js'
   },
   //target: "es15",
