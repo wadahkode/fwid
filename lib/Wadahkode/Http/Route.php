@@ -6,7 +6,7 @@ class Route
   public $any = [];
   private $app;
   public $directive = [];
-  private $dict = "";
+  private $dict;
   private $_GET = [];
   private $_POST = [];
   private $_FILES = [];
@@ -24,13 +24,16 @@ class Route
   public function __call(string $name="", array $param=[])
   {
     if (count($param) < 2) return false;
-    list($pathname, $func) = $param;
+    $pathname = $param[0];
+    $func = $param[1];
+    // list($pathname, $func) = $param;
     
     if (!in_array(strtoupper($name), $this->supportedHttpMethods)) {
       $this->invalidMethodHandler();
     }
-    $this->pathname = $pathname;
-    $this->{$name}[$this->pathHandler($pathname)] = $func;
+    $pathFormated = $this->pathHandler($pathname);
+    $this->pathname = $pathFormated;
+    $this->{$name}[$pathFormated] = $func;
     $this->resolve();
   }
   
@@ -45,33 +48,35 @@ class Route
     }
   }
   
+  private function defaultRequestHandler()
+  {
+    header("{$this->server->serverProtocol} 404 Not Found");
+  }
+  
   private function invalidMethodHandler()
   {
-    
+    header("{$this->server->serverProtocol} 405 Method Not Allowed");
   }
   
   private function parseURL()
   {
     $requestUri = $this->server->requestUri;
-    if (preg_match("/^\/([\w]+)(.*)/", $requestUri, $match)) {
-      $requestUri = rtrim($match[0], DIRECTORY_SEPARATOR);
-    }
+    // if (preg_match("/^\/([\w]+)(.*)/", $requestUri, $match)) {
+    //   var_dump($match);
+    //   $requestUri = rtrim($match[0], DIRECTORY_SEPARATOR);
+    // }
     return filter_var($requestUri, FILTER_SANITIZE_URL);
   }
   
   private function pathHandler(string $pathname="")
   {
     $result = (rtrim($pathname, '/'));
-    if ($result !== '') {
-      return $result;
-    } else {
-      return '/';
-    }
+    return (($result !== '') ? $result : '/');
   }
   
-  public function require($module)
+  public function require($module, ...$param)
   {
-    return $this->app->require($module);
+    return $this->app->require($module, $param);
   }
   
   private function resolve()
@@ -79,31 +84,18 @@ class Route
     $pathname = $this->pathname;
     $pathFormated = "";
     
-    if ($this->parseURL() == '/') {
-      $pathname = $this->parseURL();
-    } else {
-      $pathname = explode('/', ltrim($this->parseURL(), DIRECTORY_SEPARATOR));
-    }
+    $mdict = $this->{strtolower($this->server->requestMethod)};
     
-    // kamus mencari method pada kelas Route
-    $methodDict = $this->{strtolower($this->server->requestMethod)};
-    
-    foreach ($methodDict as $dict => $value) {
-      preg_match_all('/\w+/', $dict, $d);
-      
-      foreach ($d[0] as $k => $v) {
-        $this->directive[$v] = $pathname[$k];
+    if ($pathname == $this->parseURL() && $pathname == '/') {
+      if (isset($mdict[$pathname])) {
+        echo $mdict[$pathname]($this);
       }
-      
-      if (!empty($this->directive)) {
-        $methodDict[$dict](json_decode(json_encode($this->directive)));
-      } else {
-        $pathFormated = $this->pathHandler($this->server->requestUri);
-      
-        if (isset($methodDict[$pathFormated])) {
-          echo($methodDict[$pathFormated]($this));
-        }
+      return false;
+    } else if ($pathname !== '/' && $pathname == $this->parseURL()) {
+      if (isset($mdict[$pathname])) {
+        echo $mdict[$pathname]($this);
       }
+      return false;
     }
-  }
+ }
 }
