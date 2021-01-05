@@ -7,3 +7,5 @@ src/tests/config/firebase.ts
 public/js/*
 !style.min.js
 build
+src/Storage/cache/*
+!.gitkeep
