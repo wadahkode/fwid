@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "buildjs": "webpack --config webpack.prod.js",
     "devjs": "webpack --watch --config webpack.dev.js",
     "devts": "tsc -w",
     "serve": "php wadahkode serve",

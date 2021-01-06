@@ -11,4 +11,4 @@ Silahkan lanjutkan untuk pengembangan fitur yang lebih banyak.
 
 # Demo app
 
-Untuk demo lihat di <code>http://wadahkode.herokuapp.com/</code>
+Untuk demo lihat di <code>http://wadahgamer.herokuapp.com/</code>
