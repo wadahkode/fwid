@@ -1,14 +1,14 @@
 {
-    "name": "wadahkode/fwid",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "wadahkode",
-            "email": "mvp.dedefilaras@gmail.com"
-        }
-    ],
-    "require": {},
-    "require-dev": {
-      "heroku/heroku-buildpack-php": "*"
+  "name": "wadahkode/fwid",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "wadahkode",
+      "email": "mvp.dedefilaras@gmail.com"
     }
+  ],
+  "require": {},
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
 }

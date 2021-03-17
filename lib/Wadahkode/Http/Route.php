@@ -11,14 +11,17 @@ class Route
   private $_POST = [];
   private $_FILES = [];
   public $server = [];
+  public $request = [];
   private $supportedHttpMethods = [
     'GET', 'POST', 'FILES'
   ];
   private $pathname = "";
+  private $response = [];
   
   public function __construct($prop)
   {
     $this->server = $prop;
+    $this->request = $prop;
   }
   
   public function __call(string $name="", array $param=[])
@@ -34,7 +37,7 @@ class Route
     $pathFormated = $this->pathHandler($pathname);
     $this->pathname = $pathFormated;
     $this->{$name}[$pathFormated] = $func;
-    $this->resolve();
+    $this->response = $this->resolve();
   }
   
   public function call($app)
@@ -45,6 +48,10 @@ class Route
       require APP_ROUTE_DIR . 'web.php';
     } else {
       throw new \Exception('File '.APP_ROUTE_DIR . 'web.php'.' tidak dapat ditemukan!');
+    }
+
+    if (!is_array($this->response)) {
+      printf("router [%s] tidak dapat ditemukan!", $this->server->requestMethod);
     }
   }
   
@@ -85,17 +92,17 @@ class Route
     $pathFormated = "";
     
     $mdict = $this->{strtolower($this->server->requestMethod)};
-    
+
     if ($pathname == $this->parseURL() && $pathname == '/') {
       if (isset($mdict[$pathname])) {
         echo $mdict[$pathname]($this);
       }
-      return false;
     } else if ($pathname !== '/' && $pathname == $this->parseURL()) {
       if (isset($mdict[$pathname])) {
         echo $mdict[$pathname]($this);
       }
-      return false;
     }
- }
+
+    return $mdict;
+  }
 }

@@ -11,3 +11,7 @@ $this->get('/', function($route){
 $this->get('/admin', function($route){
   $route->require('App/Http/Controller/AdminController', 'index');
 });
+
+$this->post('/admin/signin', function($route){
+  $route->require('App/Http/Controller/AuthenticatedController', ['index', $route->request]);
+});

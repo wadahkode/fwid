@@ -20,10 +20,9 @@ class Request
 
 	public function get($property)
 	{
-	  if (array_key_exists('any', $this->request)) {
+    if (array_key_exists('any', $this->request)) {
 			if ($this->request['any'] == "") {
-			  return false;
-				//throw new \Exception("Permintaan $property tidak dapat ditemukan!");
+        return false;
 			} else {
 				return $property;
 			}

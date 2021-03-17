@@ -83,6 +83,10 @@ class Terminal
     if (!empty($argv) && $argv == '--with-nodejs') {
       return exec('nodemon ./build/serve.js');
     } else {
+      exec("echo -n '\e[32m[+] Server running on http://localhost:8000\e[0m\n';", $output);
+
+      printf("%s\n", $output[0]);
+
       return exec("php -S localhost:8000 -t ./public");
     }
   }

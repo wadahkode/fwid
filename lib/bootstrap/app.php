@@ -9,7 +9,7 @@ require_once __DIR__ . '/loader/autoload.php';
 
 // First launch app
 return (new Wadahkode\App)->register(function($app){
-    $app->getSupportHelper(['app'], true);
-    
-    return $app;
+  $app->getSupportHelper(['app'], true);
+  
+  return $app;
 });

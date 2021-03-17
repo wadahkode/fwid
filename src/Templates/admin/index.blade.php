@@ -1,7 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Administrator | Wadahkode')
 
-@section('content')
-  <h1>Hello admin</h1>
+@section('main')
+  <div>
+    <form action="/admin/signin" method="post">
+      <div><input type="email" name="email" placeholder="input your email" required></div>
+      <div><input type="password" name="password" placeholder="input your password" required></div>
+      <div>
+        <button type="submit">Signin</button>
+      </div>
+    </form>
+  </div>
 @endsection

@@ -8,12 +8,18 @@ class Controller
 {
   public function __construct($prop)
   {
+    $childClass = get_called_class();
+
     if (gettype($prop) == 'array') {
-      foreach ($prop as $k => $v) {
-        if (isset($prop[$k])) {
-          if (method_exists($this, $prop[$k])) {
-            $this->{$prop[$k]}();
+      foreach($prop as $prop) {
+        if (\is_array($prop)) {
+          list($method, $arguments) = $prop;
+  
+          if (\method_exists($childClass, $method)) {
+            return \call_user_func([$childClass, $method], $arguments !== "" ? $arguments : "");
           }
+        } else {
+          return $this->{$prop}();
         }
       }
     }
@@ -41,7 +47,7 @@ class Controller
     $blade = \Jenssegers\Blade\Blade::class;
     $blade = new $blade(APP_TEMPLATES_DIR, APP_STORE_DIR.'cache');
     
-    echo $blade->make($filename)->render();
+    echo $blade->make($filename, $data)->render();
     // return (
     //   file_exists(APP_TEMPLATES_DIR.$filename.'.html')
     //   ? APP_TEMPLATES_DIR.$filename.'.html'

@@ -3,8 +3,5 @@ namespace @namespace;
 
 class @class extends Controller
 {
-    public function index()
-    {
-        echo "Hello";
-    }
+  // Create method
 }

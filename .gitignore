@@ -9,3 +9,5 @@ public/js/*
 build
 src/Storage/cache/*
 !.gitkeep
+
+.prettierrc
