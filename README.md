@@ -20,6 +20,8 @@ Buka file <code>Procfile</code> dan salin kode berikut untuk menjalankan dengan 
 web: vendor/bin/heroku-php-apache2 public/
 ```
 
-# Demo app
+<!--Demo app
 
 Untuk demo lihat di <code>http://wadahgamer.herokuapp.com/</code>
+
+-->
