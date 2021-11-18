@@ -33,3 +33,5 @@ src/Config/realpath.*
 src/Config/database.*
 
 src/App/Http/Controller/Controller.php.bak
+
+public/css/tailwind.css
