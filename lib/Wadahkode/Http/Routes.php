@@ -2,6 +2,9 @@
 
 namespace Wadahkode\Http;
 
+use Illuminate\Support\Facades\DB;
+use Wadahkode\Database\DBModel;
+
 /**
  * Routes
  * 
@@ -33,8 +36,8 @@ class Routes extends RouterFactory
   }
 
   // Remove resolve duplicate running.
-  public function __destruct()
-  {
-    $this->resolve();
-  }
+  // public function __destruct()
+  // {
+  //   return $this->resolve();
+  // }
 }

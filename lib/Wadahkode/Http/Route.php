@@ -81,6 +81,10 @@ abstract class Route
   {
     $routerSelf = new Routes([Request::fromGlobals()]);
 
+    if (empty($arguments)) {
+      return false;
+    }
+
     list($pathname, $controllers) = $arguments;
 
     $routerSelf->pathname = $pathname;

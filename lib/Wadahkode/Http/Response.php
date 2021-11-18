@@ -12,16 +12,14 @@ class Response
 
   private function getRouterFactory()
   {
-    $rf = Routes::getInstance($this->request);
-    $rf->getWebRouter();
+    $router = Routes::getInstance($this->request);
+    $router->getWebRouter();
 
-    return $rf;
+    return $router->resolve();
   }
 
   public function send()
   {
     $this->getRouterFactory();
-
-    return $this;
   }
 }

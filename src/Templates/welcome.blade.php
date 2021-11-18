@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Selamat datang | Wadahkode')
+@section('title', $title)
 
 @section('header')
   <nav>

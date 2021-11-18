@@ -73,17 +73,21 @@ abstract class RouterFactory extends Route
           return $this->invalidMethodHandler();
         }
 
-        $explodes = explode("@", $this->{$requestMethod}[$requestUri]);
-        $this->controllers = $this->namespace . $explodes[0] . "Controller";
-        $this->method      = $explodes[1];
+        preg_match('/(^[\w]+)@([\w]+)$/i', $this->{$requestMethod}[$requestUri], $explodes);
+        unset($explodes[0]);
+        sort($explodes);
+
+        list($controllers, $method) = $explodes;
+
+        // $explodes = explode("@", $this->{$requestMethod}[$requestUri]);
+        $this->controllers = $this->namespace . $controllers . "Controller";
+        $this->method      = $method;
         $this->params      = $this->request[0];
 
-        return call_user_func([$this->controllers, $this->method], $this->params);
-      
-      default:
-        # code...
         break;
     }
+
+    return call_user_func_array([new $this->controllers($this->params), $this->method], [$this->params]);
   }
 
   private function requestMethod()

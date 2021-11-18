@@ -2,7 +2,7 @@
 
 namespace Wadahkode\Database;
 
-class Schemas extends DB
+abstract class Schemas extends DB
 {
   private $db = null;
 

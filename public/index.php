@@ -20,7 +20,10 @@ $app->compatible(array(
   )
 ));
 
-$app->debug(false);
+/**
+ * Debug application
+ */
+$app->debug(true);
 
 // launch app
 return $app->createApp();

@@ -1,11 +1,10 @@
 <?php
 
-use Wadahkode\Http\Fetch;
-
 /**
  * Api Helper
  * 
  * @author wadahkode <mvp.dedefilaras@gmail.com>
+ * @since version 0.0.1
  */
 function createNotification($message, $errorType) {
     echo $message;

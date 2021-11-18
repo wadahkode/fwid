@@ -46,12 +46,11 @@ class App extends Container
 	
 	/**
 	 * Creating Application
-	 *
-	 * @return void
+	 * 
 	 */
 	public function createApp()
 	{
-		$this->terminate(Request::fromGlobals(), function($response){
+		return $this->terminate(Request::fromGlobals(), function($response){
 			$response->send();
 		});
 	}
@@ -60,7 +59,7 @@ class App extends Container
 	 * Debugging
 	 *
 	 * @param boolean $boolean
-	 * @return void
+	 * 
 	 */
 	public function debug($boolean=false)
 	{
@@ -71,7 +70,7 @@ class App extends Container
 	 * Check Compatible version of php and module php
 	 *
 	 * @param array $settings
-	 * @return void
+	 * 
 	 */
 	public function compatible(array $settings=[])
 	{
@@ -87,7 +86,7 @@ class App extends Container
 	 * Helpers application
 	 *
 	 * @param [type] ...$helpers
-	 * @return void
+	 * 
 	 */
 	public function getSupportHelper(...$helpers)
 	{
@@ -110,7 +109,7 @@ class App extends Container
 	 * Override include function
 	 *
 	 * @param string $filename
-	 * @return void
+	 * 
 	 */
 	protected function includeFile(string $filename)
 	{
@@ -155,7 +154,7 @@ class App extends Container
 	 * Register Application
 	 *
 	 * @param callable $app
-	 * @return void
+	 * 
 	 */
 	public function register(callable $app)
 	{
@@ -195,7 +194,7 @@ class App extends Container
 	 * Settings config application
 	 *
 	 * @param string $name
-	 * @return void
+	 * 
 	 */
 	protected function setConfig(String $name)
 	{
@@ -211,11 +210,11 @@ class App extends Container
 	/**
 	 * Terminate application for sending of request
 	 *
-	 * @param Object $request
+	 * @param object $request
 	 * @param Closure $callback
-	 * @return void
+	 * 
 	 */
-	protected function terminate(Object $request, Closure $callback)
+	protected function terminate(object $request, Closure $callback)
 	{
 		return $callback(new Response($request));
 	}

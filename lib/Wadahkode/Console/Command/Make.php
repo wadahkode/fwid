@@ -13,10 +13,12 @@ trait Make
     $this->samples = $samples;
     preg_match("/@php/", $this->samples, $php);
     preg_match("/@namespace/", $this->samples, $namespace);
+    preg_match("/@use/", $this->samples, $use);
     preg_match("/@class/", $this->samples, $class);
     
     $this->samples = str_replace($php[0], "<?php", $this->samples);
     $this->samples = str_replace($namespace[0], "App\\Http\\Model", $this->samples);
+    $this->samples = str_replace($use[0], "Wadahkode\\Http\\Model", $this->samples);
     $this->samples = str_replace($class[0], $name . 'Model', $this->samples);
     
     $model = $this->findDir('src/App/Http/Model');
