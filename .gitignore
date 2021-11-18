@@ -26,3 +26,4 @@ lib/Wadahkode/Contract/*
 !Property.*
 
 src/Config/realpath.*
+src/Config/database.*
