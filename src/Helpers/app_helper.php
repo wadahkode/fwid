@@ -1,4 +1,7 @@
 <?php
+
+use Wadahkode\Http\Fetch;
+
 /**
  * Api Helper
  * 
@@ -10,4 +13,12 @@ function createNotification($message, $errorType) {
 
 function test() {
     echo "Hello";
+}
+
+function view($filename, $data = []) {
+  require(dirname(__DIR__,2) . '/lib/Wadahkode/vendor/autoload.php');
+  $blade = \Jenssegers\Blade\Blade::class;
+  $blade = new $blade(APP_TEMPLATES_DIR, APP_STORE_DIR.'cache');
+    
+  echo $blade->make($filename, $data)->render();
 }

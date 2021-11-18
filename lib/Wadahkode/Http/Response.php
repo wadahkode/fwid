@@ -1,13 +1,27 @@
 <?php
 namespace Wadahkode\Http;
 
-use Wadahkode\Http\Route;
-
 class Response
 {
-  public function next($request, $app)
+  private $request = [];
+
+  public function __construct(object $request)
   {
-    $route = new Route($request);
-    return $route->call($app);
+    $this->request = $request;
+  }
+
+  private function getRouterFactory()
+  {
+    $rf = Routes::getInstance($this->request);
+    $rf->getWebRouter();
+
+    return $rf;
+  }
+
+  public function send()
+  {
+    $this->getRouterFactory();
+
+    return $this;
   }
 }

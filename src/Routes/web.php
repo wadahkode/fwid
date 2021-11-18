@@ -1,17 +1,7 @@
 <?php
 
-$this->get('/', function($route){
-  // call WelcomeController
-  $welcome = $route->require('App/Http/Controller/WelcomeController');
+use Wadahkode\Http\Route;
 
-  // cetak Hello world di browser
-  $welcome->index();
-});
-
-$this->get('/admin', function($route){
-  $route->require('App/Http/Controller/AdminController', 'index');
-});
-
-$this->post('/admin/signin', function($route){
-  $route->require('App/Http/Controller/AuthenticatedController', ['index', $route->request]);
-});
+Route::get("/", "Welcome@index");
+Route::get("/admin", "Admin@index");
+Route::get("/home", "Home@index");

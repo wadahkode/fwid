@@ -121,6 +121,13 @@ abstract class ClassLoader
       }
     }
   }
+
+  private function defaultFileHandler()
+  {
+    $serverProtocol = $_SERVER["SERVER_PROTOCOL"];
+
+    header("{$serverProtocol} 404 Not Found");
+  }
   
   private function findClass($className, $default = null)
   {
@@ -173,7 +180,13 @@ abstract class ClassLoader
   private function includeFile($filename)
   {
     $file = $this->findFile($filename);
-    if (!$file) exit("File $filename.php not found!\n");
+
+    if (!$file) {
+      echo("File $filename" . PHP_EXT . " not found!\n");
+
+      return $this->defaultFileHandler();
+    }
+
     include($file);
   }
   

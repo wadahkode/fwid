@@ -11,3 +11,18 @@ src/Storage/cache/*
 !.gitkeep
 
 .prettierrc
+/nbproject
+/nbproject/private/
+
+lib/Wadahkode/Http/*
+!Request.php
+!Response.php
+!Route.php
+!RouterFactory.php
+!Routes.php
+
+lib/Wadahkode/Contract/*
+!Module.*
+!Property.*
+
+src/Config/realpath.*

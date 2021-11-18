@@ -1,108 +1,98 @@
 <?php
+
 namespace Wadahkode\Http;
 
-class Route
+/**
+ * Class Route
+ * 
+ * @author wadahkode <mvp.dedefilaras@gmail.com>
+ * @since version 0.0.1
+ */
+abstract class Route
 {
-  public $any = [];
-  private $app;
-  public $directive = [];
-  private $dict;
-  private $_GET = [];
-  private $_POST = [];
-  private $_FILES = [];
-  public $server = [];
-  public $request = [];
-  private $supportedHttpMethods = [
-    'GET', 'POST', 'FILES'
+  /**
+   * Controllers
+   *
+   * @var string $controllers
+   */
+  protected $controllers = "PageNotFound";
+
+  /**
+   * Method of controllers
+   *
+   * @var string $method
+   */
+  protected $method      = "index";
+
+  /**
+   * Namespace of controllers
+   *
+   * @var string $namespace
+   */
+  protected $namespace   = "App\\Http\\Controller\\";
+
+  /**
+   * Parameter of controllers
+   *
+   * @var array $params
+   */
+  protected $params      = [];
+
+  /**
+   * Pathname of Route::get(pathname)
+   *
+   * @var string $pathname
+   */
+  protected $pathname    = "";
+
+  /**
+   * Default supported global http method for route
+   *
+   * @var array $supportedHttpMethods
+   */
+  protected $supportedHttpMethods = [
+    'GET', 'POST', 'FILES', 'PUT', 'OPTIONS'
   ];
-  private $pathname = "";
-  private $response = [];
   
-  public function __construct($prop)
+  /**
+   * Magic method of call $this->{$_SERVER["REQUEST_METHOD"]}
+   *
+   * @param string $name
+   * @param string $arguments
+   */
+  public function __call($name, $arguments)
   {
-    $this->server = $prop;
-    $this->request = $prop;
-  }
-  
-  public function __call(string $name="", array $param=[])
-  {
-    if (count($param) < 2) return false;
-    $pathname = $param[0];
-    $func = $param[1];
-    // list($pathname, $func) = $param;
-    
+    list($pathname, $controllers) = $arguments;
+
     if (!in_array(strtoupper($name), $this->supportedHttpMethods)) {
-      $this->invalidMethodHandler();
-    }
-    $pathFormated = $this->pathHandler($pathname);
-    $this->pathname = $pathFormated;
-    $this->{$name}[$pathFormated] = $func;
-    $this->response = $this->resolve();
-  }
-  
-  public function call($app)
-  {
-    $this->app = $app;
-    
-    if (file_exists(APP_ROUTE_DIR . 'web.php')) {
-      require APP_ROUTE_DIR . 'web.php';
-    } else {
-      throw new \Exception('File '.APP_ROUTE_DIR . 'web.php'.' tidak dapat ditemukan!');
+      return $this->invalidMethodHandler();
     }
 
-    if (!is_array($this->response)) {
-      printf("router [%s] tidak dapat ditemukan!", $this->server->requestMethod);
-    }
+    $this->{$name}[$pathname] = $controllers;
   }
-  
-  private function defaultRequestHandler()
+
+  /**
+   * Magic method of call Route::[METHOD_NAME]
+   *
+   * @param string $name
+   * @param string $arguments
+   */
+  static public function __callStatic($name, $arguments)
   {
-    header("{$this->server->serverProtocol} 404 Not Found");
+    $routerSelf = new Routes([Request::fromGlobals()]);
+
+    list($pathname, $controllers) = $arguments;
+
+    $routerSelf->pathname = $pathname;
+    $routerSelf->{$name}[$pathname] = $controllers;
+
+    return $routerSelf;
   }
-  
+
   private function invalidMethodHandler()
   {
-    header("{$this->server->serverProtocol} 405 Method Not Allowed");
-  }
-  
-  private function parseURL()
-  {
-    $requestUri = $this->server->requestUri;
-    // if (preg_match("/^\/([\w]+)(.*)/", $requestUri, $match)) {
-    //   var_dump($match);
-    //   $requestUri = rtrim($match[0], DIRECTORY_SEPARATOR);
-    // }
-    return filter_var($requestUri, FILTER_SANITIZE_URL);
-  }
-  
-  private function pathHandler(string $pathname="")
-  {
-    $result = (rtrim($pathname, '/'));
-    return (($result !== '') ? $result : '/');
-  }
-  
-  public function require($module, ...$param)
-  {
-    return $this->app->require($module, $param);
-  }
-  
-  private function resolve()
-  {
-    $pathname = $this->pathname;
-    $pathFormated = "";
-    
-    $mdict = $this->{strtolower($this->server->requestMethod)};
+    $serverProtocol = $_SERVER["SERVER_PROTOCOL"];
 
-    if ($pathname == $this->parseURL() && $pathname == '/') {
-      if (isset($mdict[$pathname])) {
-        echo $mdict[$pathname]($this);
-      }
-    } else if ($pathname !== '/' && $pathname == $this->parseURL()) {
-      if (isset($mdict[$pathname])) {
-        echo $mdict[$pathname]($this);
-      }
-    }
-
-    return $mdict;
+    header("{$serverProtocol} 405 Method Not Allowed");
   }
 }

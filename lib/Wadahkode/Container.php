@@ -14,7 +14,8 @@ class Container
 		$config = file_exists($this->config[$key])
 			? include($this->config[$key])
 			: false;
-			
-		return new Definition($config);
+
+		return $config;
+		// return new Definition($config);
 	}
 }

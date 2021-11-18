@@ -13,8 +13,5 @@
     <div class="cover container bg-dark pt-5 pb-4">@yield('cover')</div>
     <main class="container mt-3">@yield('main')</main>
   </div>
-  <script src="js/all.min.js"></script>
-  <script src="js/style.min.js"></script>
-  <script src="js/app.min.js"></script>
 </body>
 </html>

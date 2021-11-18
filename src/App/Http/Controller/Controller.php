@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controller;
 
 /**
  * Controller core
+ * 
+ * @author Ayus Irfang Filaras <ayus.sahabat@gmail.com>
  */
 class Controller
 {

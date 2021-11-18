@@ -1,14 +1,32 @@
 <?php
 namespace Wadahkode\Http;
 
-class Request
+final class Request
 {
-	public $request = [];
+	private $request = [];
 
 	public function __construct(array $request = [])
 	{
+		if (empty($request)) {
+			return false;
+		}
+
 		$this->request = $request;
 		$this->bootstrapSelf();
+	}
+
+	static public function __callStatic($name, $arguments)
+	{
+		return call_user_func(function($callable) {
+      list($class, $method, $arguments) = $callable;
+
+      if (empty($arguments)) {
+        return $class->{$method}();
+      }
+
+      return $class->{$method}($arguments[0]);
+
+    }, [new self, $name, $arguments]);
 	}
 
 	private function bootstrapSelf()
@@ -43,17 +61,25 @@ class Request
 		return $result;
 	}
 
-	public function fromGlobals()
+	static private function fromGlobals()
 	{
-		return new Self(array_merge(
-			$_GET,
-			$_POST,
-			[],
-			$_SERVER,
-			$_COOKIE,
+		$methodGlobals = array_merge($_GET, $_POST, [], $_SERVER, $_COOKIE, $_ENV, $_FILES);
+    $self = new Self();
+
+    foreach($methodGlobals as $key => $value) {
+      $self->{$self->toCamelCase($key)} = $value;
+    }
+
+    return $self;
+		// return new Self(array_merge(
+		// 	$_GET,
+		// 	$_POST,
+		// 	[],
+		// 	$_SERVER,
+		// 	$_COOKIE,
 			// $_ENV,
-			$_FILES,
+		// 	$_FILES,
 			// $_REQUEST
-		));
+		// ));
 	}
 }

@@ -1,11 +1,28 @@
 <?php
 namespace Wadahkode;
 
+use Closure;
+use Wadahkode\Http\Request;
+use Wadahkode\Http\Response;
+
+/**
+ * Application class
+ * 
+ * @author wadahkode <mvp.dedefilaras@gmail.com>
+ * @since version 0.0.1
+ */
 class App extends Container
 {
+	/**
+	 * @var array $config = []
+	 */
 	protected $config = [];
 	
+	/**
+	 * @var string $prefixHelper
+	 */
 	protected $prefixHelper = "_helper";
+
 	/**
 	 * @var string $rootPath
 	 */
@@ -23,28 +40,55 @@ class App extends Container
 	{
 		$this->rootPath = realpath(rtrim(dirname($rootPath), '/\\')) . DIRECTORY_SEPARATOR;
 		$this->sourcePath = $this->rootPath . 'src' . DIRECTORY_SEPARATOR;
-		$this->setConfig('config.realpath');
-		$this->getConfig('realpath');
+		$this->setConfig('config.app');
+		$this->getConfig('app');
 	}
 	
+	/**
+	 * Creating Application
+	 *
+	 * @return void
+	 */
 	public function createApp()
 	{
-	  $request = $this->require('Wadahkode/Http/Request');
-	  $response = $this->require('Wadahkode/Http/Response');
-	  
-	  $terminate = $this->terminate($request, $response);
+		$this->terminate(Request::fromGlobals(), function($response){
+			$response->send();
+		});
+	}
+
+	/**
+	 * Debugging
+	 *
+	 * @param boolean $boolean
+	 * @return void
+	 */
+	public function debug($boolean=false)
+	{
+		ini_set('display_errors', $boolean);
 	}
 	
+	/**
+	 * Check Compatible version of php and module php
+	 *
+	 * @param array $settings
+	 * @return void
+	 */
 	public function compatible(array $settings=[])
 	{
 	  if (array_key_exists('php_version', $settings)) {
-		$this->phpCheckVersion($settings['php_version']);
+			$this->phpCheckVersion($settings['php_version']);
 	  } else if (array_key_exists('extension_loaded', $settings)) {
-		$module = $this->require('Wadahkode/Contract/Module');
-		$module->ref($settings['extension_loaded']);
+			$module = $this->require("Wadahkode/Contract/Module");
+			$module->ref($settings['extension_loaded']);
 	  }
 	}
 	
+	/**
+	 * Helpers application
+	 *
+	 * @param [type] ...$helpers
+	 * @return void
+	 */
 	public function getSupportHelper(...$helpers)
 	{
 		list($helper, $prepend) = $helpers;
@@ -62,7 +106,13 @@ class App extends Container
 		}, array_values($helper));
 	}
 	
-	protected function includeFile($filename)
+	/**
+	 * Override include function
+	 *
+	 * @param string $filename
+	 * @return void
+	 */
+	protected function includeFile(string $filename)
 	{
 		return (file_exists($filename)
 			? include($filename)
@@ -101,30 +151,53 @@ class App extends Container
 			);
 	}
 	
+	/**
+	 * Register Application
+	 *
+	 * @param callable $app
+	 * @return void
+	 */
 	public function register(callable $app)
 	{
 		return ($app($this));
 	}
 	
-	// @override: require()
-	public function require($module, ...$param)
+	/**
+	 * Override require function
+	 *
+	 * @param string $className
+	 * @param array ...$args
+	 * @return $className
+	 */
+	public function require(string $className, ...$args)
 	{
-		$module = str_replace("/","\\",$module);
-		if (class_exists($module)) {
-			if (empty($param)) {
-				return new $module;
-			} else {
-				switch (count($param)) {
-					case 2: return new $module($param[0],$param[1]);
-					case 3: return new $module($param[0],$param[1],$param[2]);
-					default: return new $module($param[0]);
-				}
+		$className = str_replace("/","\\",$className);
+
+		if (class_exists($className) && empty($args)) {
+			return new $className;
+		} else if (class_exists($className) && !empty($args)) {
+			list($method, $params) = $args;
+
+			switch (count($args)) {
+				case 2:
+					return call_user_func_array([$className, $method], $params);
+				case 3:
+					return call_user_func_array([$className, $method], $params);
+				default:
+					return call_user_func_array([$className, $method], []);
 			}
-			return false;
 		}
+
+		return false;
 	}
 	
-	protected function setConfig($name)
+	/**
+	 * Settings config application
+	 *
+	 * @param string $name
+	 * @return void
+	 */
+	protected function setConfig(String $name)
 	{
 		$name = preg_split("/\./", $name);
 		list($path, $file) = $name;
@@ -135,8 +208,15 @@ class App extends Container
 		$this->config[$file] = $this->sourcePath . ucfirst($path) . DIRECTORY_SEPARATOR . $file . FileExtension::get('php');
 	}
 	
-	protected function terminate($req, $res)
+	/**
+	 * Terminate application for sending of request
+	 *
+	 * @param Object $request
+	 * @param Closure $callback
+	 * @return void
+	 */
+	protected function terminate(Object $request, Closure $callback)
 	{
-		return $res->next($req->fromGlobals(), $this);
+		return $callback(new Response($request));
 	}
 }

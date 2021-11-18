@@ -1,13 +1,14 @@
 {
-	"name": "wadahkode/wadahkode",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "wadahkode",
-			"email": "mvp.dedefilaras@gmail.com"
-		}
-	],
-	"require": {
-		"jenssegers/blade": "^1.4"
-	}
+  "name": "wadahkode/wadahkode",
+  "version": "0.0.1",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "wadahkode",
+      "email": "mvp.dedefilaras@gmail.com"
+    }
+  ],
+  "require": {
+    "jenssegers/blade": "^1.4"
+  }
 }

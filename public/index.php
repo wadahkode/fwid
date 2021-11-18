@@ -20,5 +20,7 @@ $app->compatible(array(
   )
 ));
 
+$app->debug(false);
+
 // launch app
 return $app->createApp();
