@@ -2,9 +2,6 @@
 
 namespace Wadahkode\Http;
 
-use Illuminate\Support\Facades\DB;
-use Wadahkode\Database\DBModel;
-
 /**
  * Routes
  * 
