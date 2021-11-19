@@ -23,6 +23,18 @@ const config = {
       filename: "styles.css",
     }),
   ],
+  performance: {
+    hints: "warning", // enum
+    maxAssetSize: 20000000, // int (in bytes),
+    maxEntrypointSize: 10000000, // int (in bytes)
+    assetFilter: function (assetFilename) {
+      // Function predicate that provides asset filenames
+      return assetFilename.endsWith(".css") || assetFilename.endsWith(".js");
+    },
+  },
+  optimization: {
+    runtimeChunk: "single",
+  },
   module: {
     rules: [
       {
