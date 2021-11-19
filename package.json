@@ -25,17 +25,19 @@
     "url": "https://github.com/wadahkode/fwid/issues"
   },
   "homepage": "https://github.com/wadahkode/fwid#readme",
-  "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "@webpack-cli/generators": "^2.4.1",
+  "dependencies": {
     "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "@fortawesome/fontawesome-free": "^5.15.4"
+  },
+  "devDependencies": {
+    "@webpack-cli/generators": "^2.4.1",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "mini-css-extract-plugin": "^2.4.5",
-    "postcss": "^8.3.11",
     "postcss-loader": "^6.2.0",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^2.2.19",
     "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1",
     "workbox-webpack-plugin": "^6.4.1"
