@@ -1,10 +1,21 @@
-# fwid
+# Framework Indonesia (fwid)
 
-Framework Indonesia
+![Screenshot](./screenshot.png)
+
+Fwid adalah sebuah kerangka kerja yang dibuat menggunakan bahasa PHP versi 7.x.x, terinspirasi dari framework Laravel dan CodeIgniter.
+
+# Syarat
+
+- PHP 7.x.x
+- Basic PHP
+- Postgresql, mysql, mariadb
+- nodejs
 
 # Untuk mencoba
 
-    php wadahkode serve
+    $ git clone https://github.com/wadahkode/fwid.git framework-id
+    $ cd framework-id
+    $ php wadahkode serve
 
 buka browser lalu ketikkan: http://localhost:8000
 
