@@ -7,11 +7,11 @@
   <title>@yield('title')</title>
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 </head>
-<body>
+<body class="antialised bg-gray-200">
   <div id="root">
     <header class="fixed top-0 w-full">@yield('header')</header>
-    <div class="h-screen">@yield('cover')</div>
-    <main class="container mt-3">@yield('main')</main>
+    <section>@yield('cover')</section>
+    <main>@yield('main')</main>
   </div>
 
   <script src="js/main.js"></script>

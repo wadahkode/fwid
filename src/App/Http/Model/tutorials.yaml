@@ -1,0 +1,12 @@
+table: tutorials
+column:
+  - '"id"'
+  - '"title"'
+  - '"content"'
+  - '"author"'
+  - '"createdAt"'
+  - '"updatedAt"'
+
+order: id
+limit: 7
+sort: false

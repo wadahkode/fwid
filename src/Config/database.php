@@ -32,4 +32,4 @@ $config = [
   ]
 ];
 
-return json_encode($config);
+return json_decode(json_encode($config));

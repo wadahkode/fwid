@@ -13,5 +13,7 @@ use Wadahkode\Http\Controller\BaseController;
 class Controller extends BaseController
 {
   public function model(string $name="")
-  {}
+  {
+    return parent::model($name);
+  }
 }

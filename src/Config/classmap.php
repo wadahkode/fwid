@@ -9,5 +9,5 @@ $basedir = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR;
 
 return [
     'App\\' => $basedir . 'src/App',
-    'Wadahkode\\' => $basedir . 'lib'
+    'Wadahkode\\' => $basedir . 'lib',
 ];

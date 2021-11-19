@@ -87,6 +87,16 @@ abstract class RouterFactory extends Route
         break;
     }
 
+    if (!class_exists($this->controllers)) {
+      printf("Kelas <b>[%s]</b> tidak dapat ditemukan.", $this->controllers);
+
+      return $this->defaultControllerHandler();
+    } else if (!method_exists($this->controllers, $this->method)) {
+      printf("Method <b>[%s]</b> tidak ada pada kelas <b>%s</b>", $this->method, $this->controllers);
+
+      return $this->invalidMethodHandler();
+    }
+
     return call_user_func_array([new $this->controllers($this->params), $this->method], [$this->params]);
   }
 
