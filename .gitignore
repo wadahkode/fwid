@@ -34,4 +34,10 @@ src/Config/database.*
 
 src/App/Http/Controller/Controller.php.bak
 
-public/css/tailwind.css
+public/css/*
+!.gitkeep
+
+public/js/*
+!.gitkeep
+
+index.html
