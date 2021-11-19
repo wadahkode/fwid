@@ -14,7 +14,7 @@ class TutorialController extends Controller
   public function index()
   {
     return view('tutorial', [
-      "title"     => "Baca artikel",
+      "title"     => "Kumpulan tutorial",
       "posts"     => $this->data
     ]);
   }
