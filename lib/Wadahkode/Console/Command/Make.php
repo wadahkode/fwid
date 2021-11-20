@@ -33,11 +33,24 @@ trait Make
     $samples = file_get_contents($samples);
     $this->samples = $samples;
     preg_match("/@php/", $this->samples, $php);
-    preg_match("/@namespace/", $this->samples, $namespace);
+    preg_match("/@namespace.*/", $this->samples, $namespace);
     preg_match("/@class/", $this->samples, $class);
+
+    $explodes = preg_match("/(^[\w]+)\/([\w]+)$/i", $name, $match) ? $match : $name;
     
+    if (is_array($explodes)) {
+      $this->samples = str_replace($namespace[0], "App\\Http\\Controller\\" . $explodes[1] . ";\n\nuse App\\Http\\Controller\\Controller;", $this->samples);
+      $this->samples = str_replace($class[0], $explodes[2] . 'Controller', $this->samples);
+
+      if (!is_dir(APP_CONTROLLER_DIR . $explodes[1])) {
+        mkdir(APP_CONTROLLER_DIR . $explodes[1]);
+      }
+
+      $name = $explodes[0];
+    }
+
     $this->samples = str_replace($php[0], "<?php", $this->samples);
-    $this->samples = str_replace($namespace[0], "App\\Http\\Controller", $this->samples);
+    $this->samples = str_replace($namespace[0], "App\\Http\\Controller;", $this->samples);
     $this->samples = str_replace($class[0], $name . 'Controller', $this->samples);
     
     $controller = $this->findDir('src/App/Http/Controller');
