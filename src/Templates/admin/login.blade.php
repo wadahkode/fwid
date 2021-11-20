@@ -6,7 +6,7 @@
   <div class="w-full h-screen inline-flex items-center justify-center cover">
     <div class="lg:w-2/6 md:w-2/4 inline-flex flex-col gap-y-3">
       <h1 class="text-2xl font-semibold tracking-wides text-white">Hai, Administrator</h1>
-      <form class="bg-white shadow-lg rounded-md lg:p-8 md:p-6 inline-flex flex-col gap-y-3" action="/admin/signin" method="post">
+      <form class="bg-white shadow-lg rounded-md lg:p-8 md:p-4 inline-flex flex-col gap-y-3" action="/admin/signin" method="post">
         <div>
           <input type="email" class="px-3 py-2 w-full border border-gray-300 rounded focus:outline-none text-gray-600 text-lg" name="email" placeholder="masukan email anda" required>
         </div>

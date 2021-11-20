@@ -77,6 +77,18 @@ abstract class RouterFactory extends Route
         unset($explodes[0]);
         sort($explodes);
 
+        if (empty($explodes)) {
+          preg_match('/(^[\w]+)\/([\w]+)@([\w]+)$/i', $this->{$requestMethod}[$requestUri], $explodes);
+          unset($explodes[0]);
+          sort($explodes);
+        }
+        
+        if (is_dir(APP_CONTROLLER_DIR . $explodes[0])) {
+          $this->namespace = $this->namespace . $explodes[0] . "\\";
+          unset($explodes[0]);
+          sort($explodes);
+        }
+
         list($controllers, $method) = $explodes;
 
         // $explodes = explode("@", $this->{$requestMethod}[$requestUri]);
