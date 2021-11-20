@@ -14,7 +14,7 @@
     <main>@yield('main')</main>
   </div>
 
-  <script src="js/main.js"></script>
-  <script src="js/runtime.js"></script>
+  <script src="dist/main.js"></script>
+  <script src="dist/runtime.js"></script>
 </body>
 </html>

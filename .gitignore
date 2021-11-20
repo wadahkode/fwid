@@ -38,4 +38,6 @@ public/css/*
 public/js/*
 !.gitkeep
 
+public/dist
+
 index.html

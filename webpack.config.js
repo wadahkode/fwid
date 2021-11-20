@@ -13,7 +13,7 @@ const stylesHandler = isProduction
 const config = {
   entry: "./app.js",
   output: {
-    path: path.resolve(__dirname, "public/js"),
+    path: path.resolve(__dirname, "public/dist"),
     filename: "[name].js",
   },
   plugins: [
