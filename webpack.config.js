@@ -15,6 +15,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, "public/dist"),
     filename: "[name].js",
+    clean: true
   },
   plugins: [
     // Add your plugins here
@@ -71,6 +72,8 @@ module.exports = () => {
     config.plugins.push(
       new WorkboxWebpackPlugin.GenerateSW({
         maximumFileSizeToCacheInBytes: 10000000,
+        clientsClaim: true,
+        skipWaiting: true,
       })
     );
   } else {
