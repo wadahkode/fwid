@@ -68,7 +68,7 @@ module.exports = () => {
 
     config.plugins.push(
       new WorkboxWebpackPlugin.GenerateSW({
-        maximumFileSizeToCacheInBytes: 5000000,
+        maximumFileSizeToCacheInBytes: 10000000,
       })
     );
   } else {
