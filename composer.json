@@ -8,7 +8,9 @@
       "email": "mvp.dedefilaras@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "php": "^7.4"
+  },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
   },
