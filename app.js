@@ -1,3 +1,4 @@
+import "tailwindcss/tailwind.css";
 import "./styles.css";
 
 if ("serviceWorker" in navigator) {

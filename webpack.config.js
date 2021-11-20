@@ -21,6 +21,7 @@ const config = {
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     new MiniCssExtractPlugin({
       filename: "styles.css",
+      chunkFilename: "styles.css",
     }),
   ],
   performance: {
@@ -63,6 +64,7 @@ module.exports = () => {
     config.plugins.push(
       new MiniCssExtractPlugin({
         filename: "styles.css",
+        chunkFilename: "styles.css",
       })
     );
 
