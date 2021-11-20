@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-  {{-- <link rel="stylesheet" href="dist/styles.css"> --}}
+  <link rel="stylesheet" href="dist/styles.css">
 </head>
 <body class="antialised bg-gray-200">
   <div id="root">
