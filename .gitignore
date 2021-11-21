@@ -28,7 +28,7 @@ lib/Wadahkode/Contract/*
 lib/Wadahkode/Definition.php.bak
 
 src/Config/realpath.*
-src/Config/database.*
+# src/Config/database.*
 
 src/App/Http/Controller/Controller.php.bak
 
