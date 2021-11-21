@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     enabled: true,
-    content: ["./src/Storage/cache/*.php"],
+    content: ["./app.js"],
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
