@@ -3,6 +3,8 @@
 use Wadahkode\Http\Route;
 
 Route::get("/", "Welcome@index");
+Route::get("/contact", "Contact@index");
+Route::get("/about", "About@index");
 
 Route::get("/tutorial", "Tutorial@index");
 
