@@ -20,5 +20,6 @@
 
   <script src="dist/main.js"></script>
   <script src="dist/runtime.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@wadahkode/memories@1.1.82/build/memories.min.js"></script>
 </body>
 </html>

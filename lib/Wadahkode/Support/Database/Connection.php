@@ -22,7 +22,7 @@ class Connection
   // First method for calling
   public function __construct()
   {
-    if (APP_PRODUCTION === FALSE && file_exists(APP_CONFIG_DIR . "database.heroku" . PHP_EXT)) {
+    if (APP_PRODUCTION !== FALSE && file_exists(APP_CONFIG_DIR . "database.heroku" . PHP_EXT)) {
       $this->config = require(APP_CONFIG_DIR . 'database.heroku' . PHP_EXT);
     } else {
       $this->config = require(APP_CONFIG_DIR . 'database' . PHP_EXT);

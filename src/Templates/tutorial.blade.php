@@ -22,7 +22,7 @@
 @section('main')
   <div class="grid grid-cols-3 gap-12 mt-20 container mx-auto">
     <div class="col-span-2 inline-grid gap-y-3">
-      <h1 class="text-2xl font-semibold">Artikel terbaru</h1>
+      <h1 class="text-2xl font-semibold">Tutorial terbaru</h1>
       @foreach ($posts as $post)
         <article class="bg-gray-100 shadow-md p-4 flex rounded-md">
           <picture>

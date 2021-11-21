@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/wadahkode/fwid#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.11",
-    "tailwindcss": "^2.2.19",
-    "@fortawesome/fontawesome-free": "^5.15.4"
+    "tailwindcss": "^2.2.19"
   },
   "devDependencies": {
     "@webpack-cli/generators": "^2.4.1",
