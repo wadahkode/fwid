@@ -19,6 +19,9 @@ class Controller extends BaseController
 
   public function redirectTo($url)
   {
-    header('location: ' . $url);
+    $host  = $_SERVER['HTTP_HOST'];
+    // $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    header("Location: http://{$host}/{$url}");
+    exit;
   }
 }
