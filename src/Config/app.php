@@ -7,7 +7,7 @@
  */
 $basedir = dirname(__DIR__, 2);
 
-define('APP_PRODUCTION', false);
+define('APP_PRODUCTION', true);
 
 define('APP_API_DIR',           $basedir . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Helpers' . DIRECTORY_SEPARATOR);
 define('APP_CONFIG_DIR',        $basedir . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR);
