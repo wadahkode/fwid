@@ -5,9 +5,14 @@
 @section('header')
   <nav class="py-6">
     <div class="lg:container lg:mx-auto mx-6 flex items-center gap-x-6">
-      <h1 class="lg:text-3xl text-2xl font-semibold text-white">
-        <a href="/">Wadahkode</a>
-      </h1>
+      <div class="inline-flex items-center gap-x-3">
+        <button id="btn-menu" class="text-white lg:hidden md:hidden sm:hidden">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+        <h1 class="lg:text-3xl text-2xl font-semibold text-white">
+          <a href="/">Wadahkode</a>
+        </h1>
+      </div>
 
       <ul class="ml-auto text-white gap-x-6 hidden lg:inline-flex md:inline-flex items-center">
         <li><a href="/">Beranda</a></li>
