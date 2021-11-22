@@ -13,6 +13,7 @@ src/Storage/cache/*
 /nbproject/private/
 
 lib/Wadahkode/Http/*
+!Session
 !Controller
 !Model
 !Request.php
