@@ -32,7 +32,7 @@ class AuthenticatedController extends Controller
     });
 
     if (!empty($this->session->get('id'))) {
-      return $this->redirectTo('dashboard');
+      return $this->redirectTo('admin/dashboard');
     }
 
     return $validate;
