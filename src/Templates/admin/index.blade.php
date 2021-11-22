@@ -5,6 +5,9 @@
 @section('main')
   <div class="w-full h-screen inline-flex items-center justify-center cover">
     <div class="lg:w-2/6 md:w-2/4 inline-flex flex-col gap-y-3">
+      @isset($error)
+        <div class="bg-red-600 p-4 text-white font-semibold tracking-wides rounded-md shadow">{{$error}}</div>
+      @endisset
       <h1 class="text-2xl font-semibold tracking-wides text-white">Hai, Administrator</h1>
       <form class="bg-white shadow-lg rounded-md lg:p-8 md:p-6 inline-flex flex-col gap-y-3" action="/admin/signin" method="post">
         <div>

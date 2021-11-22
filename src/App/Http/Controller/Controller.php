@@ -16,4 +16,9 @@ class Controller extends BaseController
   {
     return parent::model($name);
   }
+
+  public function redirectTo($url)
+  {
+    header('location: ' . $url);
+  }
 }

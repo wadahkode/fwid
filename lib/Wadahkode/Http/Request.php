@@ -36,16 +36,26 @@ final class Request
 		}
 	}
 
-	public function get($property)
+	public function get($name, $filter=null)
 	{
+		$request = Request::fromGlobals();
+
+		foreach ($request as $key => $value) {
+			if ($key === $name && !empty($filter)) {
+				return trim(filter_var($request->{$name}, $filter));
+			}
+
+			return $request->{$name};
+		}
+
     if (array_key_exists('any', $this->request)) {
 			if ($this->request['any'] == "") {
         return false;
 			} else {
-				return $property;
+				return $name;
 			}
 		}
-		//return $this->{$property};
+		//return $this->{$name};
 	}
 
 	private function toCamelCase($string)

@@ -1,0 +1,1 @@
+<h1>Welcome back {{$data->firstName}}</h1>

@@ -8,11 +8,11 @@ use Wadahkode\Support\Database\Model;
 abstract class BaseController
 {
   protected $model_dir = APP_MODEL_DIR;
-
+  
   protected $extensionsYaml = [
     ".yaml", ".yml"
   ];
-
+  
   protected $model = [];
 
   protected function model(string $name="")

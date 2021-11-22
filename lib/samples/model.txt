@@ -1,10 +1,5 @@
-@php
-
-namespace @namespace;
-
-use @use;
-
-class @class extends Model
-{
-  
-}
+@table: table_name
+@column: *
+@order: id
+@limit: 1
+@sort: false

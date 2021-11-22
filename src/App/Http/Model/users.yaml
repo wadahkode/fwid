@@ -1,0 +1,6 @@
+table: users
+bind: "email"
+column: "*"
+order: false
+limit: false
+sort: false

@@ -65,42 +65,44 @@ abstract class RouterFactory extends Route
     $requestMethod = strtolower($this->requestMethod());
     $requestUri = $this->parseURL();
 
-    switch ($requestMethod) {
-      case 'get':
-        if (!isset($this->{$requestMethod}[$requestUri])) {
-          printf("Router [%s] %s tidak dapat ditemukan.", strtoupper($requestMethod), $requestUri);
+    if (!isset($this->{$requestMethod}[$requestUri])) {
+      printf("Router [%s] %s tidak dapat ditemukan.", strtoupper($requestMethod), $requestUri);
 
-          return $this->invalidMethodHandler();
-        }
-
-        preg_match('/(^[\w]+)@([\w]+)$/i', $this->{$requestMethod}[$requestUri], $explodes);
-        unset($explodes[0]);
-        sort($explodes);
-
-        if (empty($explodes)) {
-          preg_match('/(^[\w]+)\/([\w]+)@([\w]+)$/i', $this->{$requestMethod}[$requestUri], $explodes);
-          unset($explodes[0]);
-          sort($explodes);
-        }
-        
-        if (is_dir(APP_CONTROLLER_DIR . $explodes[0])) {
-          $this->namespace = $this->namespace . $explodes[0] . "\\";
-          unset($explodes[0]);
-          sort($explodes);
-        }
-
-        list($controllers, $method) = $explodes;
-
-        // $explodes = explode("@", $this->{$requestMethod}[$requestUri]);
-        $this->controllers = $this->namespace . $controllers . "Controller";
-        $this->method      = $method;
-        $this->params      = $this->request[0];
-
-        break;
+      return $this->invalidMethodHandler();
     }
 
+    preg_match('/(^[\w]+)@([\w]+)$/i', $this->{$requestMethod}[$requestUri], $explodes);
+    unset($explodes[0]);
+    sort($explodes);
+
+    if (empty($explodes)) {
+      preg_match('/(^[\w]+)\/([\w]+)@([\w]+)$/i', $this->{$requestMethod}[$requestUri], $explodes);
+      unset($explodes[0]);
+      sort($explodes);
+    }
+        
+    if (is_dir(APP_CONTROLLER_DIR . $explodes[0])) {
+      $this->namespace = $this->namespace . $explodes[0] . "\\";
+      unset($explodes[0]);
+      sort($explodes);
+    }
+
+    list($controllers, $method) = $explodes;
+
+    // $explodes = explode("@", $this->{$requestMethod}[$requestUri]);
+    $this->controllers = $this->namespace . $controllers . "Controller";
+    $this->method      = $method;
+    $this->params      = $this->request[0];
+    // switch ($requestMethod) {
+    //   case 'get':
+    //     break;
+    //   case 'post':
+    //     var_dump(isset($this->{$requestMethod}[$requestUri]));
+    //     break;
+    // }
+
     if (!class_exists($this->controllers)) {
-      printf("Kelas <b>[%s]</b> tidak dapat ditemukan.", $this->controllers);
+      printf("<br>Kelas <b>[%s]</b> tidak dapat ditemukan.", $this->controllers);
 
       return $this->defaultControllerHandler();
     } else if (!method_exists($this->controllers, $this->method)) {

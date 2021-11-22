@@ -11,19 +11,21 @@ trait Make
     $samples = $this->findFile('samples/model.txt');
     $samples = file_get_contents($samples);
     $this->samples = $samples;
-    preg_match("/@php/", $this->samples, $php);
-    preg_match("/@namespace/", $this->samples, $namespace);
-    preg_match("/@use/", $this->samples, $use);
-    preg_match("/@class/", $this->samples, $class);
+    preg_match("/@table/", $this->samples, $table);
+    preg_match("/@column/", $this->samples, $column);
+    preg_match("/@order/", $this->samples, $order);
+    preg_match("/@limit/", $this->samples, $limit);
+    preg_match("/@sort/", $this->samples, $sort);
     
-    $this->samples = str_replace($php[0], "<?php", $this->samples);
-    $this->samples = str_replace($namespace[0], "App\\Http\\Model", $this->samples);
-    $this->samples = str_replace($use[0], "Wadahkode\\Http\\Model", $this->samples);
-    $this->samples = str_replace($class[0], $name . 'Model', $this->samples);
+    $this->samples = str_replace($table[0], "table", $this->samples);
+    $this->samples = str_replace($column[0], "column", $this->samples);
+    $this->samples = str_replace($order[0], "order", $this->samples);
+    $this->samples = str_replace($limit[0], "limit", $this->samples);
+    $this->samples = str_replace($sort[0], "sort", $this->samples);
     
     $model = $this->findDir('src/App/Http/Model');
-    $file = $model . $name . 'Model.php';
-    
+    $file = $model . $name . '.yaml';
+
     return file_put_contents($file, $this->samples);
   }
   
