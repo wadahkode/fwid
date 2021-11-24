@@ -13,6 +13,7 @@ Route::get("/admin/login", "Auth/Login@index");
 Route::get("/admin/register", "Auth/Register@index");
 
 Route::get("/admin/dashboard", "Dashboard@index");
+Route::get("/admin/dashboard/postingan", "Dashboard@postingan");
 
 Route::post("/admin/signin", "Auth/Authenticated@index");
 

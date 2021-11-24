@@ -22,4 +22,20 @@ class DashboardController extends Controller
       "data"    => $data[0]
     ]);
   }
+
+  public function postingan()
+  {
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+    header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+    header("Access-Control-Max-Age: 3600");
+    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+    $test = json_encode([
+      ["title" => "title 1"],
+      ["title" => "title 2"]
+    ]);
+
+    echo($test);
+  }
 }
