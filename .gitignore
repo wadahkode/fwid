@@ -43,3 +43,6 @@ public/js/*
 public/dist
 
 index.html
+
+src/Storage/*
+!cache
