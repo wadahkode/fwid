@@ -50,6 +50,8 @@ class App extends Container
 	 */
 	public function createApp()
 	{
+		$this->saveVisitor();
+
 		return $this->terminate(Request::fromGlobals(), function($response){
 			$response->send();
 		});
@@ -188,6 +190,40 @@ class App extends Container
 		}
 
 		return false;
+	}
+
+	public function saveVisitor()
+	{
+		exec("wget -qO- http://ipecho.net/plain | xargs echo", $output);
+		$visitorFile = APP_STORE_DIR . 'visitor.json';
+		$date = date('Y-m-d h:i:s');
+		$visitor = [];
+
+		if (file_exists($visitorFile)) {
+			$visitor = json_decode(file_get_contents($visitorFile), true);
+		} else {
+			file_put_contents($visitorFile, json_encode([]));
+
+			return false;
+		}
+
+		array_push($visitor, [
+			"ip" => $output[0],
+			"userAgent" => $_SERVER["HTTP_USER_AGENT"],
+			"pathname" => $_SERVER["REQUEST_URI"],
+			"datetime" => $date
+		]);
+
+		preg_match("/^\/admin.*/", $_SERVER["REQUEST_URI"], $m);
+		preg_match("/^\/api.*/", $_SERVER["REQUEST_URI"], $m1);
+
+		if (!empty($m) && !empty($_COOKIE["user"])) {
+			return false;
+		} else if (!empty($m1)) {
+			return false;
+		}
+
+		file_put_contents($visitorFile, json_encode($visitor));
 	}
 	
 	/**
