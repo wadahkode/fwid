@@ -54,7 +54,8 @@
 
   <script src="../dist/main.js"></script>
   <script src="../dist/runtime.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../vendor/chart.js/chart.min.js"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
   <script src="../js/dashboard.js"></script>
 </body>
 </html>
