@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div id="root" class="grid grid-rows-3 gap-3">
+  {{-- <div id="root" class="grid grid-rows-3 gap-3"> --}}
     {{-- <div class="col-start-2">
       <aside class="fixed top-14 left-0 bottom-0 lg:w-1/5 md:w-1/4 w-3/4 h-screen bg-white lg:overflow-auto md:overflow-auto overflow-y-scroll sidebar shadow-lg hidden lg:inline md:inline">
         @yield('sidebar')
@@ -50,11 +50,11 @@
     </div>
 
     <main id="main" class="row-span-2 col-span-2">@yield('main')</main> --}}
-
-  </div>
+  {{-- </div> --}}
 
   <script src="../dist/main.js"></script>
   <script src="../dist/runtime.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="../js/dashboard.js"></script>
 </body>
 </html>

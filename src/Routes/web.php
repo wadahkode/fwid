@@ -15,6 +15,9 @@ Route::get("/admin/register", "Auth/Register@index");
 Route::get("/admin/dashboard", "Dashboard@index");
 Route::get("/admin/dashboard/postingan", "Dashboard@postingan");
 
+Route::get("/api/posts/tutorial", "Tutorial@getTutorial");
+Route::get("/api/visitor", "Visitor@index");
+
 Route::post("/admin/signin", "Auth/Authenticated@index");
 
 

@@ -18,4 +18,9 @@ class TutorialController extends Controller
       "posts"     => $this->data
     ]);
   }
+
+  public function getTutorial()
+  {
+    echo(json_encode($this->data));
+  }
 }

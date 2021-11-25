@@ -2,24 +2,35 @@
 
 namespace App\Http\Controller;
 
+use Wadahkode\Http\Request;
+
 class DashboardController extends Controller
 {
-  public function __construct()
+  protected $data = [];
+  protected $idLogged = null;
+
+  public function __construct(Request $request)
   {
-    $this->user = $this->model('users');
+    $this->user     = $this->model('users');
+    $this->session  = $this->user->session();
+    $this->idLogged = $this->session->get('id');
     
-    if (empty($this->user->session()->get('id'))) {
+    if (empty($this->idLogged) && empty($request->user)) {
       return $this->redirectTo('admin');
     }
   }
 
-  public function index()
+  public function index(Request $request)
   {
-    $data = $this->user->findBy('id', $this->user->session->get('id'));
+    if (!empty($this->idLogged)) {
+      $this->data = $this->user->findBy('id', $this->idLogged);
+    } else if (!empty($request->user)) {
+      $this->data = $this->user->findBy('id', $request->user);
+    }
 
     return view("admin/dashboard", [
       "title"   => "Dashboard",
-      "data"    => $data[0]
+      "data"    => $this->data[0]
     ]);
   }
 

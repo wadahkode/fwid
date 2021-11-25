@@ -1,7 +1,8 @@
 <nav class="bg-blue-500 text-gray-100 shadow-lg py-2 fixed w-full top-0 z-auto">
   <div class="flex items-center justify-between mx-6">
-    <div class="mr-auto">
+    <div class="mr-auto inline-flex gap-x-2 items-center">
       @include('components.buttons._mini')
+      <a href="/admin" class="text-lg text-white">Wadahkode</a>
     </div>
     <div class="mr-auto w-2/4">
       <input type="search" name="s" class="px-3 py-2 w-full rounded-md text-gray-600 focus:outline-none" placeholder="cari data disini...">

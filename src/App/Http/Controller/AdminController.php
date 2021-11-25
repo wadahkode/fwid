@@ -1,13 +1,19 @@
 <?php
 namespace App\Http\Controller;
 
+use Wadahkode\Http\Request;
+
 class AdminController extends Controller
 {
-  public function __construct()
+  public function __construct(Request $request)
   {
-    $this->user = $this->model('users');
+    $this->user     = $this->model('users');
+    $this->session  = $this->user->session();
 
-    if (!empty($this->user->session()->get('id'))) {
+    
+    if (!empty($this->session->get('id'))) {
+      return $this->redirectTo('admin/dashboard');
+    } else if (!empty($request->user)) {
       return $this->redirectTo('admin/dashboard');
     }
   }

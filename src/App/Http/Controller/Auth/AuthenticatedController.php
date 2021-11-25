@@ -16,6 +16,7 @@ class AuthenticatedController extends Controller
   {
     $email = $request->get('email', FILTER_SANITIZE_STRIPPED);
     $password = $request->get('password', FILTER_SANITIZE_STRIPPED);
+    $rememberMe = $request->get('remember');
     
     $validate = $this->user->validate([$email, $password], function($response){
       if ($response['error']) {
@@ -30,6 +31,14 @@ class AuthenticatedController extends Controller
 
       return $response['data'];
     });
+
+    if ($rememberMe === "on") {
+      $cookieName = "user";
+      $cookieValue = $this->session->get('id');
+      $pathname = $request->pathname;
+
+      setcookie($cookieName, $cookieValue, time() + (86400 * 30), $pathname);
+    }
 
     if (!empty($this->session->get('id'))) {
       return $this->redirectTo('admin/dashboard');
