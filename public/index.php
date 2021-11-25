@@ -23,7 +23,7 @@ $app->compatible(array(
 /**
  * Debug application
  */
-$app->debug(true);
+$app->debug(false);
 
 // launch app
 return $app->createApp();
