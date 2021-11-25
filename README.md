@@ -34,5 +34,3 @@ web: vendor/bin/heroku-php-apache2 public/
 # Demo app
 
 Untuk demo lihat di <code>https://wadahkode.herokuapp.com/</code>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3ojQvC1cdGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
