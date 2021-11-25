@@ -11,9 +11,7 @@ class AdminController extends Controller
     $this->session  = $this->user->session();
 
     
-    if (!empty($this->session->get('id'))) {
-      return $this->redirectTo('admin/dashboard');
-    } else if (!empty($request->user)) {
+    if (!empty($this->session->get('id')) && !empty($request->user)) {
       return $this->redirectTo('admin/dashboard');
     }
   }
