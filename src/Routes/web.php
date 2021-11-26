@@ -13,7 +13,8 @@ Route::get("/admin/login", "Auth/Login@index");
 Route::get("/admin/register", "Auth/Register@index");
 
 Route::get("/admin/dashboard", "Dashboard@index");
-Route::get("/admin/dashboard/postingan", "Dashboard@postingan");
+Route::get("/admin/dashboard/posts", "Dashboard@getPost");
+Route::get("/admin/dashboard/posts/newpost", "Dashboard@createNewPost");
 
 Route::get("/api/posts/tutorial", "Tutorial@getTutorial");
 Route::get("/api/visitor", "Visitor@index");
