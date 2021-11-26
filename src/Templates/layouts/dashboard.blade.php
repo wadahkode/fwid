@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../dist/styles.css">
+  <link rel="stylesheet" href="{{asset('/dist/styles.css')}}">
 </head>
 <body class="antialised bg-gray-200" style="font-family: 'Lato', sans-serif;">
   <div id="root">
@@ -52,10 +52,11 @@
     <main id="main" class="row-span-2 col-span-2">@yield('main')</main> --}}
   {{-- </div> --}}
 
-  <script src="../dist/main.js"></script>
-  <script src="../dist/runtime.js"></script>
-  <script src="../vendor/chart.js/chart.min.js"></script>
+  <script src="{{asset('/dist/main.js')}}"></script>
+  <script src="{{asset('/dist/runtime.js')}}"></script>
+  <script src="{{asset('/vendor/chart.js/chart.min.js')}}"></script>
+  <script src="{{asset('/vendor/ckeditor/ckeditor.js')}}"></script>
   {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
-  <script src="../js/dashboard.js"></script>
+  <script src="{{asset('/js/dashboard.js')}}"></script>
 </body>
 </html>

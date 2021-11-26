@@ -1,15 +1,15 @@
-<nav class="bg-blue-500 text-gray-100 shadow-lg py-2 fixed w-full top-0 z-auto">
-  <div class="flex items-center justify-between mx-6">
+<nav class="bg-blue-500 text-gray-100 shadow-lg py-2 fixed w-full top-0 z-40">
+  <div class="flex items-center justify-between lg:mx-6 mx-3">
     <div class="mr-auto inline-flex gap-x-2 items-center">
       @include('components.buttons._mini')
       <a href="/admin" class="text-lg text-white">Wadahkode</a>
     </div>
-    <div class="mr-auto w-2/4">
+    <div class="mr-auto w-2/4 hidden lg:inline">
       <input type="search" name="s" class="px-3 py-2 w-full rounded-md text-gray-600 focus:outline-none" placeholder="cari data disini...">
     </div>
     <div class="ml-auto">
       <a href="#" class="inline-flex items-center gap-x-3 text-white">
-        <span class="text-lg">
+        <span class="text-lg hidden lg:inline">
           {{$data->firstName}}
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">

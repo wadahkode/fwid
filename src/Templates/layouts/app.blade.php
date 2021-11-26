@@ -16,12 +16,12 @@
     <header class="fixed top-0 w-full">@yield('header')</header>
     <aside class="fixed top-0 w-3/4 h-screen bg-gray-900 z-40 overflow-y-scroll p-4 hidden sidebar">
       <div class="container flex flex-col gap-y-6">
-        <div>
+        <div class="inline-flex flex-col gap-3">
           <h1 class="lg:text-3xl text-xl font-semibold text-white">Wadahkode</h1>
           <hr>
         </div>
   
-        <ul class="text-white">
+        <ul class="text-white inline-flex flex-col gap-2">
           <li><a href="/">Beranda</a></li>
           <li><a href="tutorial">Tutorial</a></li>
           <li><a href="contact">Kontak kami</a></li>
@@ -45,14 +45,26 @@
     btnMenu.onclick = function(){
       if (sidebar.classList.contains("hidden") && sidebarOpacity.classList.contains("hidden")) {
         sidebar.classList.remove("hidden");
+        sidebar.classList.add("transition");
+        sidebar.classList.add("duration-700");
+        sidebar.classList.add("ease-in-out");
         sidebarOpacity.classList.remove("hidden");
+        sidebarOpacity.classList.add("transition");
+        sidebarOpacity.classList.add("duration-700");
+        sidebarOpacity.classList.add("ease-in-out");
       }
     }
 
     sidebarOpacity.onclick = function(){
       if (!sidebar.classList.contains("hidden") && !sidebarOpacity.classList.contains("hidden")) {
         sidebar.classList.add("hidden");
+        sidebar.classList.add("transition");
+        sidebar.classList.add("duration-700");
+        sidebar.classList.add("ease-in-out");
         sidebarOpacity.classList.add("hidden");
+        sidebarOpacity.classList.add("transition");
+        sidebarOpacity.classList.add("duration-700");
+        sidebarOpacity.classList.add("ease-in-out");
       }
     }
   </script>
