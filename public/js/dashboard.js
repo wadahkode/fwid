@@ -66,60 +66,64 @@ async function getPostContent(url) {
   return response.json();
 }
 
-function setPostContent(item) {
-  return /*html*/ `
-    <article class="bg-white shadow-lg shadow-lg rounded-md p-3">
-      <div>
-        <h1>${item.title}</h1>
-      </div>
-    </article>
-  `;
-}
+// function setPostContent(item) {
+//   return /*html*/ `
+//     <article class="bg-white shadow-lg shadow-lg rounded-md p-3">
+//       <div>
+//         <h1>${item.title}</h1>
+//       </div>
+//     </article>
+//   `;
+// }
 
-document.addEventListener("click", async function (e) {
-  let target = e.target;
-  let posts = null;
+// const sidebarLinks = document.querySelectorAll("aside > ul > li > a");
 
-  switch (target.hash) {
-    case "#dashboard":
-      if (!postContent.parentElement.classList.contains("hidden")) {
-        postContent.parentElement.classList.add("hidden");
-      }
+// sidebarLinks.forEach((item) => {
+//   item.addEventListener("click", async function () {
+//     let target = item;
+//     let posts = null;
 
-      if (
-        mainContent.classList.contains("hidden") &&
-        visitorContent.classList.contains("hidden")
-      ) {
-        mainContent.classList.remove("hidden");
-        visitorContent.classList.remove("hidden");
-      }
+//     switch (target.hash) {
+//       case "#dashboard":
+//         if (!postContent.parentElement.classList.contains("hidden")) {
+//           postContent.parentElement.classList.add("hidden");
+//         }
 
-      mainContent.innerHTML = "";
-      mainContent.innerHTML = await getMainContent();
-      break;
+//         if (
+//           mainContent.classList.contains("hidden") &&
+//           visitorContent.classList.contains("hidden")
+//         ) {
+//           mainContent.classList.remove("hidden");
+//           visitorContent.classList.remove("hidden");
+//         }
 
-    case "#postingan":
-      if (
-        postContent.parentElement.classList.contains("hidden") &&
-        !mainContent.classList.contains("hidden") &&
-        !visitorContent.classList.contains("hidden")
-      ) {
-        postContent.parentElement.classList.remove("hidden");
-        mainContent.classList.add("hidden");
-        visitorContent.classList.add("hidden");
-      }
+//         mainContent.innerHTML = "";
+//         mainContent.innerHTML = await getMainContent();
+//         break;
 
-      posts = await getPostContent(location.origin + "/api/posts/tutorial");
+//       case "#postingan":
+//         if (
+//           postContent.parentElement.classList.contains("hidden") &&
+//           !mainContent.classList.contains("hidden") &&
+//           !visitorContent.classList.contains("hidden")
+//         ) {
+//           postContent.parentElement.classList.remove("hidden");
+//           mainContent.classList.add("hidden");
+//           visitorContent.classList.add("hidden");
+//         }
 
-      postContent.innerHTML = "";
+//         posts = await getPostContent(location.origin + "/api/posts/tutorial");
 
-      posts.map(function (item) {
-        postContent.innerHTML += setPostContent(item);
-      });
+//         postContent.innerHTML = "";
 
-      break;
-  }
-});
+//         posts.map(function (item) {
+//           postContent.innerHTML += setPostContent(item);
+//         });
+
+//         break;
+//     }
+//   });
+// });
 
 // For chart.js
 const formatMonth = [
@@ -243,14 +247,31 @@ const configPie = {
     data.datasets[0].data[month] = total.length;
   });
 
-  const lineChart = new Chart(document.getElementById("visitor-chart"), config);
-  const pieChart = new Chart(
-    document.getElementById("visitor-chart-pie"),
-    configPie
-  );
+  if (
+    document.getElementById("visitor-chart") &&
+    document.getElementById("visitor-chart-pie")
+  ) {
+    const lineChart = new Chart(
+      document.getElementById("visitor-chart"),
+      config
+    );
+    const pieChart = new Chart(
+      document.getElementById("visitor-chart-pie"),
+      configPie
+    );
 
-  const tuts = await getPostContent(location.origin + "/api/posts/tutorial");
-  document.getElementById("total-postingan").innerHTML = tuts.length;
+    const tuts = await getPostContent(location.origin + "/api/posts/tutorial");
+    document.getElementById("total-postingan").innerHTML = tuts.length;
+  }
 })();
-
 // End chart.js
+
+// CKEditor
+if (document.getElementById("editor")) {
+  CKEDITOR.replace("editor", {
+    height: 240,
+    width: "100%",
+    removeButtons: "PasteFromWord",
+  });
+}
+// End CKEditor
