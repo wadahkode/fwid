@@ -18,18 +18,43 @@ class DashboardController extends Controller
     if (empty($this->idLogged) && empty($request->user)) {
       return $this->redirectTo('admin');
     }
-  }
 
-  public function index(Request $request)
-  {
     if (!empty($this->idLogged)) {
       $this->data = $this->user->findBy('id', $this->idLogged);
     } else if (!empty($request->user)) {
       $this->data = $this->user->findBy('id', $request->user);
     }
+  }
+
+  public function getPost()
+  {
+    $tutorials = $this->model('tutorials')->findAll();
+
+    return view("admin/posts/index", [
+      "title"   => "Semua postingan",
+      "data"    => $this->data[0],
+      "tutorials" => $tutorials
+    ]);
+  }
+
+  public function index()
+  {
+    // if (!empty($this->idLogged)) {
+    //   $this->data = $this->user->findBy('id', $this->idLogged);
+    // } else if (!empty($request->user)) {
+    //   $this->data = $this->user->findBy('id', $request->user);
+    // }
 
     return view("admin/dashboard", [
       "title"   => "Dashboard",
+      "data"    => $this->data[0]
+    ]);
+  }
+
+  public function createNewPost()
+  {
+    return view("admin/posts/create", [
+      "title"   => "Create new post",
       "data"    => $this->data[0]
     ]);
   }
