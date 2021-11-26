@@ -6,6 +6,19 @@
  * @author wadahkode <mvp.dedefilaras@gmail.com>
  * @since version 0.0.1
  */
+function asset($url) {
+  return base_url() . $url;
+}
+
+function base_url() {
+  return (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .
+    str_replace(
+      basename($_SERVER['SCRIPT_NAME']),
+      "",
+      $_SERVER['SCRIPT_NAME']
+    );
+}
+
 function createNotification($message, $errorType) {
     echo $message;
 }
