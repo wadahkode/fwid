@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
   public function getPost()
   {
-    $tutorials = $this->model('tutorials')->findAll();
+    $tutorials = $this->model('posts')->findAll();
 
     return view("admin/posts/index", [
       "title"   => "Semua postingan",
