@@ -28,8 +28,41 @@ class Schemas extends DB
    * 
    * @param null
    */
-  public function create()
-  {}
+  public function create(array $args=[])
+  {
+    $table = "public." . $this->table;
+    extract($args);
+
+    $check = $this->db->query("SELECT id,title FROM {$table} WHERE title='{$title}'");
+    $query = $this->db->prepare("INSERT INTO {$table} VALUES (
+      :uuid,
+      :title,
+      :content,
+      :author,
+      :foto,
+      :createdAt,
+      :updatedAt,
+      :labels,
+      :description
+    ) RETURNING *");
+    $query->bindParam(":uuid", $id);
+    $query->bindParam(":title", $title);
+    $query->bindParam(":content", $content);
+    $query->bindParam(":author", $author);
+    $query->bindParam(":foto", $foto);
+    $query->bindParam(":createdAt", $createdAt);
+    $query->bindParam(":updatedAt", $updatedAt);
+    $query->bindParam(":labels", $labels);
+    $query->bindParam(":description", $description);
+
+    return $check->rowCount() >= 1 ? [
+      "success" => false,
+      "error"   => [
+        "type"  => "READY",
+        "message" => "post sudah ada."
+      ]
+    ] : $query->execute();
+  }
 
   /**
    * Method for update
@@ -75,6 +108,14 @@ class Schemas extends DB
    * 
    * @param null
    */
-  public function delete()
-  {}
+  public function delete($name, $value)
+  {
+    $table = "public." . $this->table;
+    $bind = "WHERE {$name}='{$value}' RETURNING *";
+
+    $sql = trim("DELETE FROM {$table} {$bind}");
+    $statement = $this->db->query($sql);
+
+    return $statement;
+  }
 }

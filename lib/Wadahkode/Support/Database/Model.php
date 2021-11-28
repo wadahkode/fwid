@@ -12,6 +12,11 @@ class Model extends Schemas
     return new Self($model);
   }
 
+  public function deleteBy($name, $value)
+  {
+    return $this->delete($name, $value);
+  }
+
   public function findAll()
   {
     return $this->read();
@@ -21,6 +26,11 @@ class Model extends Schemas
   {
     $this->{'bind'} = $name;
     return $this->read([$value]);
+  }
+
+  public function publish(array $data=[])
+  {
+    return $this->create($data);
   }
 
   public function session()

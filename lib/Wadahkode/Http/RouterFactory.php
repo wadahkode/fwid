@@ -62,6 +62,22 @@ abstract class RouterFactory extends Route
   // Check url, controller, and execute it
   protected function resolve()
   {
+    array_map(function($directive){
+      preg_match("/\{([a-zA-Z]+)\}/", $directive, $match);
+      $a = explode("/", $directive);
+      $b = explode("/", $this->parseURL());
+
+      $c = (count($a) == count($b));
+
+      if (!empty($match) && $c) {
+        $explodes = explode("/", $this->parseURL());
+
+        $this->request[0]->{$match[1]} = end($explodes);
+        $this->request[0]->requestUri = str_replace(end($explodes), $match[0], implode("/", $explodes));
+      }
+
+    }, array_keys($this->{strtolower($this->requestMethod())}));
+
     $requestMethod = strtolower($this->requestMethod());
     $requestUri = $this->parseURL();
 

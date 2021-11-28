@@ -73,7 +73,7 @@ final class Request
 
 	static private function fromGlobals()
 	{
-		$methodGlobals = array_merge($_GET, $_POST, [], $_SERVER, $_COOKIE, $_ENV, $_FILES);
+		$methodGlobals = array_merge($_GET, $_POST, [], $_SERVER, $_COOKIE, $_ENV, $_FILES, $_REQUEST);
     $self = new Self();
 
     foreach($methodGlobals as $key => $value) {
@@ -81,15 +81,5 @@ final class Request
     }
 
     return $self;
-		// return new Self(array_merge(
-		// 	$_GET,
-		// 	$_POST,
-		// 	[],
-		// 	$_SERVER,
-		// 	$_COOKIE,
-			// $_ENV,
-		// 	$_FILES,
-			// $_REQUEST
-		// ));
 	}
 }
