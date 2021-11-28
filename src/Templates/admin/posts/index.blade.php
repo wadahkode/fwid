@@ -32,7 +32,7 @@
                   <div class="mb-2">
                     <h2 class="text-lg font-semibold tracking-wides capitalize -mb-3">{{$tuts->title}}</h2>
                     <sub class="text-xs">
-                      by {{$tuts->author}} - <time datetime="{{$tuts->updatedAt}}">{{$tuts->updatedAt}}</time>
+                      by {{$tuts->author}} - <time datetime="{{$tuts->updatedAt}}" lang="en-US" format="id-ID"></time>
                     </sub>
                   </div>
 
