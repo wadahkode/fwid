@@ -27,6 +27,18 @@ function test() {
     echo "Hello";
 }
 
+function uuid() {
+  // $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
+  echo sprintf("%04x%04x-%04x-%04x-%04x%04x%04x",
+    mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+    mt_rand(0,0xffff),
+    mt_rand(0,0x0fff) | 0x4000,
+    mt_rand(0,0x3fff) | 0x8000,
+    mt_rand(0,0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+  );
+}
+
 function view($filename, $data = []) {
   require(dirname(__DIR__,2) . '/lib/Wadahkode/vendor/autoload.php');
   $blade = \Jenssegers\Blade\Blade::class;
