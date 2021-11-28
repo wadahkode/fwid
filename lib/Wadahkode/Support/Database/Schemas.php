@@ -40,20 +40,20 @@ class Schemas extends DB
       :content,
       :author,
       :foto,
-      :createdAt,
-      :updatedAt,
       :labels,
-      :description
+      :description,
+      :createdAt,
+      :updatedAt
     ) RETURNING *");
     $query->bindParam(":uuid", $id);
     $query->bindParam(":title", $title);
     $query->bindParam(":content", $content);
     $query->bindParam(":author", $author);
     $query->bindParam(":foto", $foto);
-    $query->bindParam(":createdAt", $createdAt);
-    $query->bindParam(":updatedAt", $updatedAt);
     $query->bindParam(":labels", $labels);
     $query->bindParam(":description", $description);
+    $query->bindParam(":createdAt", $createdAt);
+    $query->bindParam(":updatedAt", $updatedAt);
 
     return $check->rowCount() >= 1 ? [
       "success" => false,

@@ -299,6 +299,8 @@ async function setPublish(form) {
 
   if (form.title.value == "") {
     form.title.focus();
+
+    return false;
   }
 
   formData.append("uuid", form.uuid.value);
