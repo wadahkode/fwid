@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="dist/styles.css">
+  @if (file_exists('dist/styles.css'))
+    <link rel="stylesheet" href="dist/styles.css">
+  @endif
 </head>
 <body class="antialised bg-gray-200">
   <div id="root">
@@ -34,8 +36,10 @@
     <main>@yield('main')</main>
   </div>
 
-  <script async prefer src="dist/main.js" crossorigin="anonymous"></script>
-  <script async prefer src="dist/runtime.js" crossorigin="anonymous"></script>
+  @if (file_exists('dist/main.js'))
+    <script async prefer src="dist/main.js" crossorigin="anonymous"></script>
+    <script async prefer src="dist/runtime.js" crossorigin="anonymous"></script>
+  @endif
   <script async prefer src="https://cdn.jsdelivr.net/npm/@wadahkode/memories@1.1.82/build/memories.min.js" crossorigin="anonymous"></script>
   <script>
     const btnMenu = document.getElementById("btn-menu");

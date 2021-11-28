@@ -45,7 +45,7 @@
             </div>
   
             <div>
-              {{$post->content}}
+              {{strip_tags(htmlspecialchars_decode($post->content))}}
             </div>
           </div>
         </article>

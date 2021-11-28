@@ -9,12 +9,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../dist/styles.css">
+  @if (file_exists('dist/styles.css'))
+    <link rel="stylesheet" href="../dist/styles.css">
+  @endif
 </head>
 <body class="antialised bg-gray-200" style="font-family: 'Lato', sans-serif;">
   <div id="root">@yield('main')</div>
 
-  <script src="../dist/main.js"></script>
-  <script src="../dist/runtime.js"></script>
+  @if (file_exists('dist/main.js'))
+    <script src="../dist/main.js"></script>
+    <script src="../dist/runtime.js"></script>
+  @endif
 </body>
 </html>
