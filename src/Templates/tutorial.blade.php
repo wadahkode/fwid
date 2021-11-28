@@ -38,8 +38,8 @@
               <h3 class="text-xl tracking-wides">{{ucwords($post->title)}}</h3>
               <p class="text-xs mb-2">
                 by <i>{{$post->author}}</i> -
-                <time datetime="{{$post->updatedAt}}" prefix="timeAgo">
-                  {{$post->updatedAt}}
+                <time datetime="{{$post->updatedAt}}" lang="en-US" format="id-ID">
+                  {{-- {{$post->updatedAt}} --}}
                 </time>
               </p>
               <div id="label">{{$post->labels}}</div>
