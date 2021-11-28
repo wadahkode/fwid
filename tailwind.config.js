@@ -1,5 +1,7 @@
 module.exports = {
-  purge: false,
+  purge: {
+    content: ["./src/Templates/**/*.blade.php"],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},

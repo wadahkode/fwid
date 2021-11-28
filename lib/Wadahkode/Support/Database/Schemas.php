@@ -31,15 +31,23 @@ class Schemas extends DB
   public function create(array $args=[])
   {
     $table = "public." . $this->table;
-    extract($args);
+    $id = $args["id"];
+    $title = $args["title"];
+    $content = $args["content"];
+    $foto = $args["foto"];
+    $author = $args["author"];
+    $labels = $args["labels"];
+    $description = $args["description"];
+    $createdAt = $args["createdAt"];
+    $updatedAt = $args["updatedAt"];
 
     $check = $this->db->query("SELECT id,title FROM {$table} WHERE title='{$title}'");
     $query = $this->db->prepare("INSERT INTO {$table} VALUES (
       :uuid,
       :title,
       :content,
-      :author,
       :foto,
+      :author,
       :labels,
       :description,
       :createdAt,
@@ -48,8 +56,8 @@ class Schemas extends DB
     $query->bindParam(":uuid", $id);
     $query->bindParam(":title", $title);
     $query->bindParam(":content", $content);
-    $query->bindParam(":author", $author);
     $query->bindParam(":foto", $foto);
+    $query->bindParam(":author", $author);
     $query->bindParam(":labels", $labels);
     $query->bindParam(":description", $description);
     $query->bindParam(":createdAt", $createdAt);

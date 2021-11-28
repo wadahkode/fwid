@@ -307,9 +307,9 @@ async function setPublish(form) {
   formData.append("title", form.title.value);
   formData.append("content", form.content.value);
   formData.append("foto", foto);
+  formData.append("author", form.author.value);
   formData.append("label", form.label.value);
   formData.append("description", form.description.value);
-  formData.append("author", form.author.value);
 
   const posts = await sendData(
     url,

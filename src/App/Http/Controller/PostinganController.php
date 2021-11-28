@@ -14,7 +14,7 @@ class PostinganController extends Controller
   public function publish(Request $request)
   {
     $statement = $this->posts->publish([
-      "id"          => md5($request->uuid),
+      "id"          => md5($request->get("uuid")),
       "title"       => $request->get("title"),
       "content"     => htmlspecialchars($request->get("content")),
       "foto"        => empty($request->get("foto")) ? "https://www.freeiconspng.com/uploads/no-image-icon-13.png" : $request->get('foto'),
