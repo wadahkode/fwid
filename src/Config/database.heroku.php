@@ -24,11 +24,11 @@ $config = [
    * yang berada dilayanan hosting yang kalian pakai.
    */
   "productiont" => [
-    'hostname'  => 'ec2-52-203-164-61.compute-1.amazonaws.com',
+    'hostname'  => 'ec2-34-233-112-169.compute-1.amazonaws.com',
     'port'      => 5432,
-    'username'  => 'heqteriifjiklb',
-    'password'  => 'c9135232e2611ac468ccb6dc75bcb0f0b98b295beffd2ff269e40910e6a427d3',
-    'database'  => 'd6i3hocgg85rf8'
+    'username'  => 'fnvywbodendjha',
+    'password'  => 'fb8d7a5daa77d6753d14eb586e3b5a8423b2ade9a15d3802c2468d97dc6c3cfe',
+    'database'  => 'dcontmckhtr3n'
   ]
 ];
 
