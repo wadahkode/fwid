@@ -43,3 +43,4 @@ public/js/*
 public/dist
 
 index.html
+api.test.http
