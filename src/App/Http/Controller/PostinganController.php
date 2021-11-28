@@ -17,7 +17,7 @@ class PostinganController extends Controller
       "id"          => md5($request->get("uuid")),
       "title"       => $request->get("title"),
       "content"     => htmlspecialchars($request->get("content")),
-      "foto"        => empty($request->get("foto")) ? "https://www.freeiconspng.com/uploads/no-image-icon-13.png" : $request->get('foto'),
+      "foto"        => empty($request->get("foto")) ? htmlspecialchars("https://www.freeiconspng.com/uploads/no-image-icon-13.png") : htmlspecialchars($request->get('foto')),
       "author"      => $request->get("author"),
       "labels"      => $request->get("label"),
       "description" => $request->get("description"),

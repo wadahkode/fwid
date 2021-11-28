@@ -3,7 +3,10 @@ column:
   - '"id"'
   - '"title"'
   - '"content"'
+  - '"foto"'
   - '"author"'
+  - '"labels"'
+  - '"description"'
   - '"createdAt"'
   - '"updatedAt"'
 

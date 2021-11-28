@@ -29,19 +29,20 @@
     <div class="col-span-2 inline-grid gap-y-3">
       <h1 class="text-2xl font-semibold">Tutorial terbaru</h1>
       @foreach ($posts as $post)
-        <article class="bg-gray-100 shadow-md p-4 flex rounded-md">
-          <picture>
-            <img src="{{$post->foto}}" alt="">
+        <article class="bg-white shadow-md _p-4 flex _gap-3 rounded-md">
+          <picture class="h-32 w-32 inline-flex items-center p-4">
+            <img src="{{$post->foto}}" class="object-cover" alt="">
           </picture>
-          <div class="inline-flex flex-col gap-y-3">
+          <div class="inline-flex flex-col gap-y-3 py-4">
             <div>
               <h3 class="text-xl tracking-wides">{{ucwords($post->title)}}</h3>
-              <p class="text-xs">
+              <p class="text-xs mb-2">
                 by <i>{{$post->author}}</i> -
-                <time datetime="{{$post->updatedAt}}">
+                <time datetime="{{$post->updatedAt}}" prefix="timeAgo">
                   {{$post->updatedAt}}
                 </time>
               </p>
+              <div id="label">{{$post->labels}}</div>
             </div>
   
             <div>
