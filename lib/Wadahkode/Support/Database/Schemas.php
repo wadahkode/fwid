@@ -77,8 +77,58 @@ class Schemas extends DB
    * 
    * @param null
    */
-  public function update()
-  {}
+  public function update(array $args=[])
+  {
+    $table = "public." . $this->table;
+    $id = $args["id"];
+    $title = $args["title"];
+    $content = $args["content"];
+    $foto = $args["foto"];
+    $author = $args["author"];
+    $labels = $args["labels"];
+    $description = $args["description"];
+    $createdAt = $args["createdAt"];
+    $updatedAt = $args["updatedAt"];
+
+    // $check = $this->db->query("SELECT id,title FROM {$table} WHERE title='{$title}'");
+    $query = $this->db->prepare("UPDATE {$table} SET 
+      id=:uuid,
+      title=:title,
+      content=:content,
+      foto=:foto,
+      author=:author,
+      labels=:labels,
+      description=:description,
+      \"createdAt\"=:createdAt,
+      \"updatedAt\"=:updatedAt
+    WHERE title='{$title}'
+    RETURNING *");
+    $query->bindParam(":uuid", $id);
+    $query->bindParam(":title", $title);
+    $query->bindParam(":content", $content);
+    $query->bindParam(":foto", $foto);
+    $query->bindParam(":author", $author);
+    $query->bindParam(":labels", $labels);
+    $query->bindParam(":description", $description);
+    $query->bindParam(":createdAt", $createdAt);
+    $query->bindParam(":updatedAt", $updatedAt);
+
+    return !$query->execute() ? [
+      "success"   => false,
+      "error"     => [
+        "type"    => "FAILED",
+        "message" => "gagal memperbarui."
+      ]
+    ] : true;
+
+    // return $check->rowCount() >= 1 ? [
+    //   "success" => false,
+    //   "error"   => [
+    //     "type"  => "READY",
+    //     "message" => "post sudah ada."
+    //   ]
+    // ] : $query->execute();
+  }
 
   /**
    * Method for read
