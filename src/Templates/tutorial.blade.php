@@ -30,7 +30,7 @@
       <h1 class="text-2xl font-semibold">Tutorial terbaru</h1>
       @foreach ($posts as $post)
         <article class="bg-white shadow-md _p-4 flex _gap-3 rounded-md">
-          <picture class="h-32 w-32 inline-flex items-center p-4">
+          <picture class="lg:h-48 lg:w-48 md:h-42 md:w-42 h-32 w-32 inline-flex items-center p-4">
             <img src="{{$post->foto}}" class="object-cover" alt="">
           </picture>
           <div class="inline-flex flex-col gap-y-3 py-4">
@@ -52,6 +52,6 @@
         </article>
       @endforeach
     </div>
-    <div>kolom</div>
+    <div class="hidden">kolom</div>
   </div>
 @endsection

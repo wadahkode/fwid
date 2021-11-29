@@ -15,8 +15,10 @@ Route::get("/admin/register", "Auth/Register@index");
 Route::get("/admin/dashboard", "Dashboard@index");
 Route::get("/admin/dashboard/posts", "Dashboard@getPost");
 Route::get("/admin/dashboard/posts/newpost", "Dashboard@createNewPost");
+Route::get("/admin/dashboard/posts/edit/{id}", "Dashboard@editPost");
 Route::post("/admin/dashboard/posts/delete/{id}", "Tutorial@delete");
 Route::post("/api/posts/publish", "Postingan@publish");
+Route::post("/api/posts/update", "Postingan@update");
 
 Route::get("/api/posts/tutorial", "Tutorial@getTutorial");
 

@@ -59,6 +59,18 @@ class DashboardController extends Controller
     ]);
   }
 
+  public function editPost(Request $request)
+  {
+    $posts = $this->model('posts');
+    $data = $posts->findBy('id', $request->id);
+
+    return view("admin/posts/edit", [
+      "title"   => "Edit posts ". $data[0]->title,
+      "data"    => $this->data[0],
+      "posts"   => $data[0]
+    ]);
+  }
+
   public function postingan()
   {
     header("Access-Control-Allow-Origin: *");

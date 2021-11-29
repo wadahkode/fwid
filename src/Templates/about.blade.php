@@ -25,7 +25,7 @@
 @endsection
 
 @section('main')
-  <div class="grid grid-cols-3 gap-12 mt-20 container mx-auto">
+  <div class="lg:grid lg:grid-cols-3 gap-12 mt-20 lg:container lg:mx-auto lg:p-0 px-5">
     <div class="col-span-2 inline-grid gap-y-3">
       <h1 class="text-2xl font-semibold">Tentang kami</h1>
   </div>

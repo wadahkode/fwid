@@ -18,6 +18,11 @@
         <a href="posts/newpost" class="bg-blue-500 text-white px-3 py-2 rounded shadow focus:outline-none">Buat tutorial</a>
       </div>
       <div id="post-content" class="inline-flex flex-col gap-3">
+        @empty($tutorials)
+          <article class="bg-white rounded-md shadow-md flex p-4 font-semibold tracking-wides">
+            Belum ada postingan
+          </article>
+        @endempty
         @foreach ($tutorials as $tuts)
             <article class="bg-white rounded-md shadow-md flex">
               <picture class="w-32 h-32 inline-flex items-center p-3">
@@ -32,7 +37,7 @@
                   <div class="mb-2">
                     <h2 class="text-lg font-semibold tracking-wides capitalize -mb-3">{{$tuts->title}}</h2>
                     <sub class="text-xs">
-                      by {{$tuts->author}} - <time datetime="{{$tuts->updatedAt}}" lang="en-US" format="id-ID"></time>
+                      by {{$tuts->author}} - <time datetime="{{$tuts->createdAt}}" lang="en-US" format="id-ID"></time> (diperbarui <time datetime="{{$tuts->updatedAt}}" lang="en-US" format="id-ID"></time>)
                     </sub>
                   </div>
 
@@ -54,24 +59,6 @@
                   </ul>
                 </div>
               </div>
-              {{-- <picture class="w-24 h-24">
-              </picture>
-              <div class="mr-auto">
-                <div>
-                  <time datetime="{{$tuts->updatedAt}}"></time>
-                </div>
-
-              </div>
-              <div class="relative ml-auto w-1/2">
-                <ul class="bg-gray-300 w-2/3 absolute">
-                  <li>
-                    <a href="">edit</a>
-                  </li>
-                  <li>
-                    <a href="">delete</a>
-                  </li>
-                </ul>
-              </div> --}}
             </article>
         @endforeach
       </div>

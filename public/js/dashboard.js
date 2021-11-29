@@ -288,6 +288,8 @@ btnPost.forEach((btn) => {
   btn.addEventListener("click", (e) =>
     e.currentTarget.dataset.target === ".publish"
       ? setPublish(document.querySelector(e.currentTarget.dataset.target))
+      : e.currentTarget.dataset.target === ".update"
+      ? setUpdate(document.querySelector(e.currentTarget.dataset.target))
       : setDraft(document.querySelector(e.currentTarget.dataset.target))
   );
 });
@@ -311,21 +313,53 @@ async function setPublish(form) {
   formData.append("label", form.label.value);
   formData.append("description", form.description.value);
 
-  const posts = await sendData(
-    url,
-    formData
-    // {
-    //   uuid: form.uuid.value,
-    //   title: form.title.value,
-    //   content: form.content.value,
-    //   foto,
-    //   label: form.label.value,
-    //   description: form.description.value,
-    //   author: form.author.value,
-    //   createdAt: form.createdAt.value,
-    //   updatedAt: form.updatedAt.value,
-    // }
-  );
+  const posts = await sendData(url, formData);
+
+  posts.map((response) => {
+    if (!response.success) {
+      if (response.error.type == "READY") {
+        postsError.className =
+          "bg-yellow-500 p-3 text-white font-semibold tracking-wides rounded-lg shadow-lg";
+        postsError.innerHTML = response.error.message;
+      } else {
+        postsError.className =
+          "bg-yellow-500 p-3 text-white font-semibold tracking-wides rounded-lg shadow-lg";
+        postsError.innerHTML = response.error.message;
+      }
+    } else {
+      postsError.className =
+        "bg-green-500 p-3 text-white font-semibold tracking-wides rounded-lg shadow-lg";
+      postsError.innerHTML = response.message;
+    }
+  });
+
+  setTimeout(() => {
+    postsError.className = "";
+    postsError.innerHTML = "";
+  }, 3600);
+}
+
+async function setUpdate(form) {
+  const foto = await uploadFoto(form.foto);
+  const url = location.origin + "/api/posts/update";
+  const formData = new FormData();
+
+  if (form.title.value == "") {
+    form.title.focus();
+
+    return false;
+  }
+
+  formData.append("uuid", form.uuid.value);
+  formData.append("title", form.title.value);
+  formData.append("content", form.content.value);
+  formData.append("foto", foto);
+  formData.append("author", form.author.value);
+  formData.append("label", form.label.value);
+  formData.append("description", form.description.value);
+  formData.append("created_at", form.created_at.value);
+
+  const posts = await sendData(url, formData);
 
   posts.map((response) => {
     if (!response.success) {
