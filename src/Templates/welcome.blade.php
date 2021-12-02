@@ -14,7 +14,7 @@
         </h1>
       </div>
 
-      <ul class="ml-auto text-white gap-x-6 hidden lg:inline-flex md:inline-flex items-center">
+      <ul class="ml-auto text-white gap-x-6 hidden lg:inline-flex md:inline-flex items-center capitalize">
         <li><a href="/">Beranda</a></li>
         <li><a href="tutorial">Tutorial</a></li>
         <li><a href="contact">Kontak kami</a></li>

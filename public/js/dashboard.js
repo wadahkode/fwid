@@ -158,32 +158,32 @@ const data = {
     {
       label: "Total",
       backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(255, 159, 64, 0.2)",
-        "rgba(255, 205, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(201, 203, 207, 0.2)",
-        "rgba(201, 203, 207, 0.2)",
-        "rgba(201, 203, 207, 0.2)",
-        "rgba(201, 203, 207, 0.2)",
-        "rgba(54, 162, 235, 0.5)",
-        "rgba(201, 203, 207, 0.2)",
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "blueviolet",
+        "rgba(128, 0, 0, 0.986)",
+        "rgba(229, 226, 226, 0.959)",
+        "rgba(11, 102, 11, 0.952)",
+        "rgba(8, 76, 99, 0.945)",
+        "rgba(165, 42, 42, 0.904)",
+        "rgba(127, 255, 212, 0.918)",
       ],
       borderColor: [
-        "rgb(255, 99, 132)",
-        "rgb(255, 159, 64)",
-        "rgb(255, 205, 86)",
-        "rgb(75, 192, 192)",
-        "rgb(54, 162, 235)",
-        "rgb(153, 102, 255)",
-        "rgb(201, 203, 207)",
-        "rgb(201, 203, 207)",
-        "rgb(201, 203, 207)",
-        "rgb(201, 203, 207)",
-        "rgb(255, 99, 133)",
-        "rgb(201, 203, 207)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
+        "rgba(0, 0, 0, 0.2)",
       ],
       borderWidth: 1,
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -230,21 +230,37 @@ const configPie = {
   const getTotalVisitor = function (callback) {
     let result = [];
 
-    for (const key in dataVisitor) {
-      date.setMonth(
-        dataVisitor[key].datetime.match(date.getMonth() + 1)
-          ? date.getMonth()
-          : date.getMonth() - 1
-      );
+    dataVisitor.filter((item) => {
+      let month = item.datetime.split("-")[1];
 
-      result.push({ [date.getMonth()]: dataVisitor[key] });
+      if (parseInt(month) == parseInt(date.getMonth() + 1)) {
+        callback(
+          parseInt(month),
+          dataVisitor.filter((item) => {
+            if (item.datetime.split("-")[1] == parseInt(month)) {
+              result.push({ item });
 
-      callback(date.getMonth(), result);
-    }
+              return result;
+            }
+          })
+        );
+      } else if (parseInt(month) == parseInt(date.getMonth())) {
+        callback(
+          parseInt(month),
+          dataVisitor.filter((item) => {
+            if (item.datetime.split("-")[1] == parseInt(month)) {
+              result.push({ item });
+
+              return result;
+            }
+          })
+        );
+      }
+    });
   };
 
   getTotalVisitor(function (month, total) {
-    data.datasets[0].data[month] = total.length;
+    data.datasets[0].data[month - 1] = total.length;
   });
 
   if (

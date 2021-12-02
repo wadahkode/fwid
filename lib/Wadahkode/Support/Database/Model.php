@@ -17,6 +17,21 @@ class Model extends Schemas
     return $this->delete($name, $value);
   }
 
+  public function findWithJoin()
+  { 
+    foreach ($this->query as $query) {
+      if (key_exists('findWithJoin', $query)) {
+        $sql = str_replace("[table]", "public." . $this->table, $query->findWithJoin);
+        $sql = str_replace("[table_join]", $this->table_join, $sql);
+        $sql = str_replace("[key]", $this->unique, $sql);
+        $sql = str_replace("[value]", $this->unique, $sql);
+
+        return $this->readJoin(trim($sql));
+      }
+    }
+
+  }
+
   public function findAll()
   {
     return $this->read();

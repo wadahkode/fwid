@@ -38,6 +38,7 @@ public/css/*
 
 public/js/*
 !.gitkeep
+!app.js
 !dashboard.js
 
 public/dist

@@ -6,6 +6,17 @@ class Schemas extends DB
 {
   protected $db = null;
 
+  protected $table        = "";
+  protected $table_join   = "";
+  protected $bind         = "";
+  protected $column       = [];
+  protected $order        = "";
+  protected $sort         = "";
+  protected $limit        = 0;
+  protected $uniqu        = "";
+  protected $query        = [];
+  protected $sql          = "";
+
   // first method calling
   public function __construct($model)
   {
@@ -15,12 +26,15 @@ class Schemas extends DB
       return false;
     }
 
-    $this->table    = $model->table;
-    $this->bind     = isset($model->bind) ? $model->bind : null;
-    $this->column   = $model->column;
-    $this->order    = $model->order;
-    $this->sort     = $model->sort;
-    $this->limit    = $model->limit;
+    $this->table      = isset($model->table)      ? $model->table       : null;
+    $this->bind       = isset($model->bind)       ? $model->bind        : null;
+    $this->column     = isset($model->column)     ? $model->column      : [];
+    $this->order      = isset($model->order)      ? $model->order       : null;
+    $this->sort       = isset($model->sort)       ? $model->sort        : null;
+    $this->limit      = isset($model->limit)      ? $model->limit       : null;
+    $this->query      = isset($model->query)      ? $model->query       : [];
+    $this->unique     = isset($model->unique)     ? $model->unique      : null;
+    $this->table_join = isset($model->table_join) ? $model->table_join  : null;
   }
 
   /**
@@ -30,16 +44,16 @@ class Schemas extends DB
    */
   public function create(array $args=[])
   {
-    $table = "public." . $this->table;
-    $id = $args["id"];
-    $title = $args["title"];
-    $content = $args["content"];
-    $foto = $args["foto"];
-    $author = $args["author"];
-    $labels = $args["labels"];
-    $description = $args["description"];
-    $createdAt = $args["createdAt"];
-    $updatedAt = $args["updatedAt"];
+    $table        = "public." . $this->table;
+    $id           = $args["id"];
+    $title        = $args["title"];
+    $content      = $args["content"];
+    $foto         = $args["foto"];
+    $author       = $args["author"];
+    $labels       = $args["labels"];
+    $description  = $args["description"];
+    $createdAt    = $args["createdAt"];
+    $updatedAt    = $args["updatedAt"];
 
     $check = $this->db->query("SELECT id,title FROM {$table} WHERE title='{$title}'");
     $query = $this->db->prepare("INSERT INTO {$table} VALUES (
@@ -79,16 +93,16 @@ class Schemas extends DB
    */
   public function update(array $args=[])
   {
-    $table = "public." . $this->table;
-    $id = $args["id"];
-    $title = $args["title"];
-    $content = $args["content"];
-    $foto = $args["foto"];
-    $author = $args["author"];
-    $labels = $args["labels"];
-    $description = $args["description"];
-    $createdAt = $args["createdAt"];
-    $updatedAt = $args["updatedAt"];
+    $table        = "public." . $this->table;
+    $id           = $args["id"];
+    $title        = $args["title"];
+    $content      = $args["content"];
+    $foto         = $args["foto"];
+    $author       = $args["author"];
+    $labels       = $args["labels"];
+    $description  = $args["description"];
+    $createdAt    = $args["createdAt"];
+    $updatedAt    = $args["updatedAt"];
 
     // $check = $this->db->query("SELECT id,title FROM {$table} WHERE title='{$title}'");
     $query = $this->db->prepare("UPDATE {$table} SET 
@@ -128,6 +142,13 @@ class Schemas extends DB
     //     "message" => "post sudah ada."
     //   ]
     // ] : $query->execute();
+  }
+
+  protected function readJoin($query)
+  {
+    $statement = $this->db->query($query);
+
+    return $statement->fetchAll(\PDO::FETCH_OBJ);
   }
 
   /**

@@ -1,0 +1,15 @@
+table: pages
+
+table_join: page_list
+
+column:
+  - '"id"'
+  - '"page_name"'
+  - '"page_status"'
+
+unique: "id"
+
+query:
+  - findAll: "SELECT * FROM [table]"
+  - findWithJoin: "SELECT * FROM [table] INNER JOIN [table_join] ON [key]=[value]"
+  - findBy: "SELECT [column] FROM [table] WHERE [column]=[value]"

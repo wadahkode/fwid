@@ -25,12 +25,12 @@
 @endsection
 
 @section('main')
-  <div class="lg:grid lg:grid-cols-3 lg:gap-12 flex flex-col gap-6 mt-20 container mx-auto lg:p-0 px-5">
+  <div class="lg:grid lg:grid-cols-3 lg:gap-12 flex flex-col gap-6 mt-20 lg:container mx-auto lg:p-0 px-5">
     <div class="col-span-2 inline-grid gap-y-3">
       <h1 class="text-2xl font-semibold">Tutorial terbaru</h1>
       @foreach ($posts as $post)
-        <article class="bg-white shadow-md _p-4 flex _gap-3 rounded-md">
-          <picture class="lg:h-48 lg:w-48 md:h-42 md:w-42 h-32 w-32 inline-flex items-center p-4">
+        <article class="bg-white shadow-md lg:p-0 p-4 lg:flex md:flex sm:flex _gap-3 rounded-md">
+          <picture class="lg:h-48 lg:w-1/3 md:h-42 md:w-1/3 h-48 w-full inline-flex items-center justify-center p-4">
             <img src="{{$post->foto}}" class="object-cover" alt="">
           </picture>
           <div class="inline-flex flex-col gap-y-3 py-4">

@@ -66,9 +66,7 @@ function setLabels() {
   }
 }
 
-(function () {
-  "use strict";
-
+document.addEventListener("DOMContentLoaded", function () {
   navigationDrawer();
   setLabels();
-})();
+});

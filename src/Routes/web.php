@@ -20,6 +20,8 @@ Route::post("/admin/dashboard/posts/delete/{id}", "Tutorial@delete");
 Route::post("/api/posts/publish", "Postingan@publish");
 Route::post("/api/posts/update", "Postingan@update");
 
+Route::get("/pages", "Pages@index");
+
 Route::get("/api/posts/tutorial", "Tutorial@getTutorial");
 
 Route::get("/api/visitor", "Visitor@index");
