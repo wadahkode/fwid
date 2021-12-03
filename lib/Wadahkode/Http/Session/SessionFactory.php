@@ -28,4 +28,8 @@ class SessionFactory
   {
     return $_SESSION[$name] = $value;
   }
+
+  protected function clear() {
+    session_destroy();
+  }
 }

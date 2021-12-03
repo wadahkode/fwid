@@ -500,3 +500,15 @@ function settingsPosts(e) {
 
   settingsPosts.classList.toggle("hidden");
 }
+
+async function settings(e) {
+  const settings = document.getElementById(e.dataset.target);
+
+  settings.classList.toggle("hidden");
+}
+
+async function sidebarToggle(e) {
+  const sidebar = document.querySelector(e.dataset.target);
+
+  sidebar.classList.toggle("hidden");
+}

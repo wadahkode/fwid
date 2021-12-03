@@ -11,13 +11,13 @@
 @endsection
 
 @section('main')
-  <main id="main" class="px-5 py-2">
+  <main id="main" class="px-5 py-2 overflow-hidden">
     <div id="posts-error"></div>
     <h2 class="font-semibold text-lg tracking-wides text-gray-600 mb-3">Edit postingan</h2>
 
-    <form class="grid grid-cols-3 gap-6 publish update draft" method="POST">
+    <form class="lg:grid grid-cols-3 flex flex-col gap-6 publish update draft" method="POST">
       <input type="hidden" name="uuid" id="uuid" value="{{$posts->id}}">
-      <div class="col-span-2 inline-grid gap-3">
+      <div class="col-span-2 lg:inline-grid flex flex-col gap-3">
         <div class="text-gray-600">
           <input type="text" id="title" class="w-full px-3 py-2 border border-gray-300 rounded" name="title" value="{{$posts->title}}" required>
         </div>
@@ -48,7 +48,7 @@
         <input type="hidden" name="created_at" id="created_at" value="{{$posts->createdAt}}">
 
         <div class="inline-flex gap-3 mt-3">
-          <button type="button" class="bg-red-400 text-white px-3 py-2 rounded-md btn-post" data-target=".draft">Simpan Dahulu</button>
+          <button type="button" class="hidden bg-red-400 text-white px-3 py-2 rounded-md btn-post" data-target=".draft">Simpan Dahulu</button>
           <button type="button" class="bg-green-400 text-white px-3 py-2 rounded-md btn-post" data-target=".update">Perbarui</button>
         </div>
       </div>

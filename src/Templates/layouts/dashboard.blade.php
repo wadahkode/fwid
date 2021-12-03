@@ -14,16 +14,16 @@
   @endif
 </head>
 <body class="antialised bg-gray-200" style="font-family: 'Lato', sans-serif;">
-  <div id="root">
+  <div id="root" class="overflow-auto pb-12">
     <header class="relative py-8">
       @yield('header')
     </header>
 
-    <div class="grid grid-cols-10">
-      <div class="col-span-2 relative">
+    <div class="grid lg:grid-cols-10 grid-cols-1">
+      <div id="sidebar" class="lg:col-span-2 relative hidden lg:block md:block">
         @yield('sidebar')
       </div>
-      <div class="col-span-8">
+      <div class="lg:col-span-8">
         @yield('main')
       </div>
     </div>

@@ -71,6 +71,21 @@ class DashboardController extends Controller
     ]);
   }
 
+  public function logout() {
+    $this->session->clear();
+    $this->redirectTo('admin');
+  }
+
+  public function profile(Request $request)
+  {
+    if ($request->id == $this->data[0]->id) {
+      return view("admin/settings/profile", [
+        "title"   => "Profile",
+        "data"    => $this->data[0]
+      ]);
+    }
+  }
+
   public function postingan()
   {
     header("Access-Control-Allow-Origin: *");
