@@ -33,4 +33,4 @@ web: vendor/bin/heroku-php-apache2 public/
 
 # Demo app
 
-Untuk demo lihat di <code>https://wadahkode.herokuapp.com/</code>
+Untuk demo lihat di <code>http://wadahkode.herokuapp.com/</code>
