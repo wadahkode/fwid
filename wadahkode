@@ -4,12 +4,20 @@
  * Terminal
  * 
  * @author wadahkode
- * @since version v1.0.0
+ * @since version v0.0.1
  */
 define('TERMINAL_INPUT', isset($_SERVER['argv']) ? $_SERVER['argv'] : []);
 
+/**
+ * Call bootstraping for autoloaded class.
+ */
 require_once __DIR__.'/lib/bootstrap/app.php';
 
+/**
+ * Register your command
+ * 
+ * ex: php wadahkode serve
+ */
 return Wadahkode\Console\Terminal::register(function($terminal){
     return $terminal->execute();
 });
