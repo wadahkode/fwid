@@ -11,7 +11,8 @@ function asset($url) {
 }
 
 function base_url() {
-  return (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .
+  // (isset($_SERVER['HTTPS']) ? "https://" : "http://")
+  return "https://" . $_SERVER['HTTP_HOST'] .
     str_replace(
       basename($_SERVER['SCRIPT_NAME']),
       "",
