@@ -37,8 +37,8 @@
   </div>
 
   @if (file_exists('dist/main.js'))
-    <script async prefer src="dist/main.js" crossorigin="anonymous"></script>
-    <script async prefer src="dist/runtime.js" crossorigin="anonymous"></script>
+    <script async prefer src="{{asset('dist/main.js')}}" crossorigin="anonymous"></script>
+    <script async prefer src="{{asset('dist/runtime.js')}}" crossorigin="anonymous"></script>
   @endif
   <script async prefer src="https://cdn.jsdelivr.net/npm/@wadahkode/memories@1.1.82/build/memories.min.js" crossorigin="anonymous"></script>
   <script src="{{asset('js/app.js')}}"></script>

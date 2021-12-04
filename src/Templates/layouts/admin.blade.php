@@ -10,15 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
   @if (file_exists('dist/styles.css'))
-    <link rel="stylesheet" href="../dist/styles.css">
+    <link rel="stylesheet" href="{{asset('/dist/styles.css')}}">
   @endif
 </head>
 <body class="antialised bg-gray-200" style="font-family: 'Lato', sans-serif;">
   <div id="root">@yield('main')</div>
 
   @if (file_exists('dist/main.js'))
-    <script src="../dist/main.js"></script>
-    <script src="../dist/runtime.js"></script>
+    <script src="{{asset('dist/main.js')}}"></script>
+    <script src="{{asset('dist/runtime.js')}}"></script>
   @endif
 </body>
 </html>

@@ -21,7 +21,7 @@
             <input type="checkbox" class="text-gray-600" name="remember"/> ingat saya
           </div>
           <div>
-            <a href="forget" class="text-blue-600">Lupa kata sandi?</a>
+            <a href="admin/help/password" class="text-blue-600">Lupa kata sandi?</a>
           </div>
         </div>
         <div>
