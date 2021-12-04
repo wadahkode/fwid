@@ -13,5 +13,14 @@
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
+  },
+  "scripts": {
+    "pre-autoload-dump": []
+  },
+  "autoload": {
+    "classmap": [
+      "src/App",
+      "lib/Wadahkode"
+    ]
   }
 }
