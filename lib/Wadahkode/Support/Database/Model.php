@@ -48,6 +48,18 @@ class Model extends Schemas
     return $this->create($data);
   }
 
+  public function updatePassword($email, $newPassword)
+  {
+    $sql = $this->query[0]->updatePassword;
+    $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $sql = str_replace("[password]", "'$newPassword'", $sql);
+    $sql = str_replace("[email]", "'$email'", $sql);
+
+    $query = $this->db->query($sql);
+
+    return $query->execute();
+  }
+
   public function session()
   {
     $this->session = SessionFactory::getInstance();

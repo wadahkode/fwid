@@ -3,12 +3,15 @@
 namespace Illuminate\Support;
 
 use Closure;
+use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Support\Traits\Tappable;
+use JsonSerializable;
 use Symfony\Component\VarDumper\VarDumper;
 
-class Stringable
+class Stringable implements JsonSerializable
 {
-    use Macroable;
+    use Conditionable, Macroable, Tappable;
 
     /**
      * The underlying string value.
@@ -256,6 +259,16 @@ class Stringable
     }
 
     /**
+     * Determine if a given string is a valid UUID.
+     *
+     * @return bool
+     */
+    public function isUuid()
+    {
+        return Str::isUuid($this->value);
+    }
+
+    /**
      * Determine if the given string is empty.
      *
      * @return bool
@@ -319,20 +332,39 @@ class Stringable
     }
 
     /**
+     * Convert GitHub flavored Markdown into HTML.
+     *
+     * @param  array  $options
+     * @return static
+     */
+    public function markdown(array $options = [])
+    {
+        return new static(Str::markdown($this->value, $options));
+    }
+
+    /**
+     * Masks a portion of a string with a repeated character.
+     *
+     * @param  string  $character
+     * @param  int  $index
+     * @param  int|null  $length
+     * @param  string  $encoding
+     * @return static
+     */
+    public function mask($character, $index, $length = null, $encoding = 'UTF-8')
+    {
+        return new static(Str::mask($this->value, $character, $index, $length, $encoding));
+    }
+
+    /**
      * Get the string matching the given pattern.
      *
      * @param  string  $pattern
-     * @return static|null
+     * @return static
      */
     public function match($pattern)
     {
-        preg_match($pattern, $this->value, $matches);
-
-        if (! $matches) {
-            return new static;
-        }
-
-        return new static($matches[1] ?? $matches[0]);
+        return new static(Str::match($pattern, $this->value));
     }
 
     /**
@@ -343,13 +375,18 @@ class Stringable
      */
     public function matchAll($pattern)
     {
-        preg_match_all($pattern, $this->value, $matches);
+        return Str::matchAll($pattern, $this->value);
+    }
 
-        if (empty($matches[0])) {
-            return collect();
-        }
-
-        return collect($matches[1] ?? $matches[0]);
+    /**
+     * Determine if the string matches the given pattern.
+     *
+     * @param  string  $pattern
+     * @return bool
+     */
+    public function test($pattern)
+    {
+        return $this->match($pattern)->isNotEmpty();
     }
 
     /**
@@ -400,6 +437,17 @@ class Stringable
     }
 
     /**
+     * Call the given callback and return a new string.
+     *
+     * @param  callable  $callback
+     * @return static
+     */
+    public function pipe(callable $callback)
+    {
+        return new static(call_user_func($callback, $this));
+    }
+
+    /**
      * Get the plural form of an English word.
      *
      * @param  int  $count
@@ -433,6 +481,39 @@ class Stringable
     }
 
     /**
+     * Remove any occurrence of the given string in the subject.
+     *
+     * @param  string|array<string>  $search
+     * @param  bool  $caseSensitive
+     * @return static
+     */
+    public function remove($search, $caseSensitive = true)
+    {
+        return new static(Str::remove($search, $this->value, $caseSensitive));
+    }
+
+    /**
+     * Reverse the string.
+     *
+     * @return static
+     */
+    public function reverse()
+    {
+        return new static(Str::reverse($this->value));
+    }
+
+    /**
+     * Repeat the string.
+     *
+     * @param  int  $times
+     * @return static
+     */
+    public function repeat(int $times)
+    {
+        return new static(Str::repeat($this->value, $times));
+    }
+
+    /**
      * Replace the given value in the given string.
      *
      * @param  string|string[]  $search
@@ -441,7 +522,7 @@ class Stringable
      */
     public function replace($search, $replace)
     {
-        return new static(str_replace($search, $replace, $this->value));
+        return new static(Str::replace($search, $replace, $this->value));
     }
 
     /**
@@ -509,6 +590,17 @@ class Stringable
     }
 
     /**
+     * Strip HTML and PHP tags from the given string.
+     *
+     * @param  string  $allowedTags
+     * @return static
+     */
+    public function stripTags($allowedTags = null)
+    {
+        return new static(strip_tags($this->value, $allowedTags));
+    }
+
+    /**
      * Convert the given string to upper-case.
      *
      * @return static
@@ -526,6 +618,16 @@ class Stringable
     public function title()
     {
         return new static(Str::title($this->value));
+    }
+
+    /**
+     * Convert the given string to title case for each word.
+     *
+     * @return static
+     */
+    public function headline()
+    {
+        return new static(Str::headline($this->value));
     }
 
     /**
@@ -583,7 +685,7 @@ class Stringable
     }
 
     /**
-     * Returns the portion of string specified by the start and length parameters.
+     * Returns the portion of the string specified by the start and length parameters.
      *
      * @param  int  $start
      * @param  int|null  $length
@@ -604,7 +706,7 @@ class Stringable
      */
     public function substrCount($needle, $offset = null, $length = null)
     {
-        return Str::substrCount($this->value, $needle, $offset, $length);
+        return Str::substrCount($this->value, $needle, $offset ?? 0, $length);
     }
 
     /**
@@ -651,25 +753,6 @@ class Stringable
     }
 
     /**
-     * Apply the callback's string changes if the given "value" is true.
-     *
-     * @param  mixed  $value
-     * @param  callable  $callback
-     * @param  callable|null  $default
-     * @return mixed|$this
-     */
-    public function when($value, $callback, $default = null)
-    {
-        if ($value) {
-            return $callback($this, $value) ?: $this;
-        } elseif ($default) {
-            return $default($this, $value) ?: $this;
-        }
-
-        return $this;
-    }
-
-    /**
      * Execute the given callback if the string is empty.
      *
      * @param  callable  $callback
@@ -678,6 +761,23 @@ class Stringable
     public function whenEmpty($callback)
     {
         if ($this->isEmpty()) {
+            $result = $callback($this);
+
+            return is_null($result) ? $this : $result;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Execute the given callback if the string is not empty.
+     *
+     * @param  callable  $callback
+     * @return static
+     */
+    public function whenNotEmpty($callback)
+    {
+        if ($this->isNotEmpty()) {
             $result = $callback($this);
 
             return is_null($result) ? $this : $result;
@@ -699,6 +799,16 @@ class Stringable
     }
 
     /**
+     * Get the number of words a string contains.
+     *
+     * @return int
+     */
+    public function wordCount()
+    {
+        return str_word_count($this->value);
+    }
+
+    /**
      * Dump the string.
      *
      * @return $this
@@ -713,13 +823,24 @@ class Stringable
     /**
      * Dump the string and end the script.
      *
-     * @return void
+     * @return never
      */
     public function dd()
     {
         $this->dump();
 
         exit(1);
+    }
+
+    /**
+     * Convert the object to a string when JSON encoded.
+     *
+     * @return string
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+        return $this->__toString();
     }
 
     /**

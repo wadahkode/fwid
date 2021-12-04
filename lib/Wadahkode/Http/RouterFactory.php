@@ -72,7 +72,7 @@ abstract class RouterFactory extends Route
       if (!empty($match) && $c) {
         $explodes = explode("/", $this->parseURL());
 
-        $this->request[0]->{$match[1]} = end($explodes);
+        $this->request[0]->{end($match)} = end($explodes);
         $this->request[0]->requestUri = str_replace(end($explodes), $match[0], implode("/", $explodes));
       }
 
