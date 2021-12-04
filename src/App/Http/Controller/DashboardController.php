@@ -39,12 +39,6 @@ class DashboardController extends Controller
 
   public function index()
   {
-    // if (!empty($this->idLogged)) {
-    //   $this->data = $this->user->findBy('id', $this->idLogged);
-    // } else if (!empty($request->user)) {
-    //   $this->data = $this->user->findBy('id', $request->user);
-    // }
-
     return view("admin/dashboard", [
       "title"   => "Dashboard",
       "data"    => $this->data[0]

@@ -4,3 +4,6 @@ column: "*"
 order: false
 limit: false
 sort: false
+
+query:
+  - updatePassword: "UPDATE users SET password=[password] WHERE email=[email]"
