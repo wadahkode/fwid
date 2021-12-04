@@ -34,3 +34,12 @@ web: vendor/bin/heroku-php-apache2 public/
 # Demo app
 
 Untuk demo lihat di <code>http://wadahkode.herokuapp.com/</code>
+
+# Halaman admin
+
+Mau akses halaman admin, silahkan kunjungi <code>http://wadahkode.herokuapp.com/admin</code>, untuk email dan kata sandi :
+
+   email    : mvp.dedefilaras@gmail.com
+   password : admin
+
+Ini gratis, yang dijual adalah jasa layanan jika mau pakai dan engga mau ribet.
