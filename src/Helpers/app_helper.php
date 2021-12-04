@@ -19,12 +19,8 @@ function base_url() {
     );
 }
 
-function createNotification($message, $errorType) {
-    echo $message;
-}
-
-function test() {
-    echo "Hello";
+function getCodeHash() {
+  return hash("sha256", str_shuffle("i love u lian"));
 }
 
 function uuid() {
