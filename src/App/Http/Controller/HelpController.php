@@ -49,7 +49,7 @@ class HelpController extends Controller
       $cookieValue = $request->email;
       $pathname = $randomLink;
 
-      setcookie($cookieName, $cookieValue, time() + (180 * 5), $pathname);
+      setcookie($cookieName, $cookieValue, time() + 180, $pathname);
 
       return view("password", [
         "title" => "Reset password sent | Wadahkode",
