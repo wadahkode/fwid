@@ -11,11 +11,11 @@ const stylesHandler = isProduction
   : "style-loader";
 
 const config = {
-  entry: "./app.js",
+  entry: ["./app.js", "regenerator-runtime/runtime.js"],
   output: {
     path: path.resolve(__dirname, "public/dist"),
     filename: "[name].js",
-    clean: true
+    clean: true,
   },
   plugins: [
     // Add your plugins here

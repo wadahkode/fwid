@@ -102,6 +102,10 @@ export async function dashboardChart() {
   const visitorChartLine = document.getElementById("visitor-chart");
   const visitorChartPie = document.getElementById("visitor-chart-pie");
 
+  if (!visitorChartLine && !visitorChartPie) {
+    return false;
+  }
+
   const getTotalVisitor = function (callback) {
     let result = [];
 
@@ -134,12 +138,18 @@ export async function dashboardChart() {
     });
   };
 
-  if (visitorChartLine && visitorChartPie) {
-    getTotalVisitor(function (month, total) {
-      data.datasets[0].data[month - 1] = total.length;
-    });
+  getTotalVisitor(function (month, total) {
+    data.datasets[0].data[month - 1] = total.length;
+  });
+
+  if (visitorChartLine) {
     const lineChart = new Chart(visitorChartLine, config);
+    lineChart.destroy();
+  }
+
+  if (visitorChartPie) {
     const pieChart = new Chart(visitorChartPie, configPie);
+    pieChart.destroy();
   }
 }
 // End chart.js

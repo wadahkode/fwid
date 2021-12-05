@@ -3,6 +3,10 @@ export function navigationDrawer() {
   const sidebar = document.querySelector(".sidebar");
   const sidebarOpacity = document.querySelector(".sidebar-opacity");
 
+  if (!btnMenu) {
+    return false;
+  }
+
   btnMenu.onclick = function () {
     if (
       sidebar.classList.contains("hidden") &&
