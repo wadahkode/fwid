@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo $__env->yieldContent('title'); ?></title>
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+</head>
+<body>
+  <div id="root">
+    <header class="fixed-top"><?php echo $__env->yieldContent('header'); ?></header>
+    <div class="cover container bg-dark pt-5 pb-4"><?php echo $__env->yieldContent('cover'); ?></div>
+    <main class="container mt-3"><?php echo $__env->yieldContent('main'); ?></main>
+  </div>
+</body>
+</html><?php /**PATH /var/www/html/fwid/src/Templates/layouts/app.blade.php ENDPATH**/ ?>

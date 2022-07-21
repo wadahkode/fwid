@@ -12,6 +12,9 @@ src/Storage/cache/*
 /nbproject
 /nbproject/private/
 
+/lib.olders
+/src.olders
+
 lib/Wadahkode/Http/*
 !Session
 !Controller

@@ -1,5 +1,0 @@
-@table: table_name
-@column: *
-@order: id
-@limit: 1
-@sort: false

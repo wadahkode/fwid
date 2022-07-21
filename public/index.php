@@ -4,7 +4,7 @@
  * 
  * @return object $app
  */
-$app = require_once __DIR__.'/../lib/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 /**
  * Mencocokkan dengan versi yang terinstall dimesin.
@@ -20,10 +20,14 @@ $app->compatible(array(
   )
 ));
 
+$app->getConfig("app");
+
 /**
  * Debug application
+ * 
+ * @var boolean true|false
  */
-$app->debug(false);
+$app->debug(true);
 
 // launch app
 return $app->createApp();

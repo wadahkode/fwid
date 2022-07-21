@@ -1,12 +1,12 @@
 import "regenerator-runtime/runtime";
 import "tailwindcss/tailwind.css";
 import "./styles.css";
-import { navigationDrawer } from "./src/JSLib/navigation";
-import { setLabels } from "./src/JSLib/labels";
-import { dashboardChart } from "./src/JSLib/chart";
-import { dashboardPost } from "./src/JSLib/posts";
-import "./src/JSLib/ckeditor";
-import * as sw from "./src/JSLib/service-worker";
+import { navigationDrawer } from "./JSLib/navigation";
+import { setLabels } from "./JSLib/labels";
+import { dashboardChart } from "./JSLib/chart";
+import { dashboardPost } from "./JSLib/posts";
+import "./JSLib/ckeditor";
+import * as sw from "./JSLib/service-worker";
 
 async function settings(e) {
   const settings = document.getElementById(e.dataset.target);
