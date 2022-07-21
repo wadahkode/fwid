@@ -5,7 +5,7 @@ node_modules
 src/node
 src/tests/config/firebase.ts
 build
-src/Storage/cache/*
+storage/cache/*
 !.gitkeep
 
 .prettierrc
